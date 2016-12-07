@@ -9,104 +9,76 @@ app.use(bodyParser.json())
 const dal = require('./dal.js')
 
 /////////////////////////////////////////////////////
-////////////// OWNERS ///////////////////////////////
+////////////// PETS /////////////////////////////////
 /////////////////////////////////////////////////////
 
-app.post('/owners', function(req, res, next) {
-    dal.createOwner(req.body, function(err, result) {
+app.post('/pets', function(req, res, next) {
+    dal.createPet(req.body, function(err, result) {
         res.status(201).send(result)
     })
     console.log(req.body)
     res.send(req.body)
 })
 
-app.get('/owners/:ownerid', function(req, res, next) {
-    const ownerID = req.params.ownerid
-    dal.getOwner(ownerID, function(err, result) {
+app.get('/pets', function(req, res, next) {
+    dal.listPets(req.body, function(err, result) {
         res.status(200).send(result)
     })
 })
 
-app.get('/owners', function(req, res, next) {
-    dal.listOwners(req.body, function(err, result) {
+app.get('/pets/:id', function(req, res, next) {
+    const petID = req.params.id
+    dal.getPet(petID, function(err, result) {
         res.status(200).send(result)
     })
 })
 
-app.put('/owners/:ownerid', function(req, res, next) {
-    const ownerID = req.params.ownerid
-    dal.updateOwner(req.body, function(err, result) {
+app.put('/pets/:id', function(req, res, next) {
+    const petID = req.params.id
+    dal.updatePet(petID, function(err, result) {
         res.status(200).send(result)
     })
 })
 
-app.delete('/owners/:ownerid', function(req, res, next) {
-    const ownerID = req.params.ownerid
-    dal.deleteOwner(req.body, function(err, result) {
+app.delete('/pets/:id', function(req, res, next) {
+    const petID = req.params.id
+    dal.deletePet(petID, function(err, result) {
         res.status(200).send(result)
     })
 })
 /////////////////////////////////////////////////////
-////////////// PETS /////////////////////////////////
+////////////// PROCEDURES ///////////////////////////
 /////////////////////////////////////////////////////
 
-app.post('/owners/:id/pets', function(req, res, next) {
-    const ownerID = req.params.id
-    dal.getOwner(ownerID, function(err, ownerdoc) {
-        if (err)
-            return err
-        if (ownerdoc) {
-            console.log(ownerdoc)
-            dal.createPet(ownerID, req.body, function(err, result) {
-                if (err) {
-                    return err
-                }
-                if (result) {
-                    console.log('create pet result', result)
-                    let pet = req.body.petName
-                    res.status(201).send(result)
-                    dal.updateOwnerwithPet(pet, ownerdoc, function(err, response) {
-                        if (err)
-                            return (err)
-                        if (response)
-                            res.status(201).send(response)
-                    })
-                }
-            })
-        }
+app.post('/procedure', function(req, res, next) {
+    dal.createProcedure(req.body, function(err, result) {
+        res.status(201).send(result)
     })
 })
 
-app.get('owners/:id/pets', function(req, res, next) {
-    const ownerID = req.params.ownerid
-    dal.listOwnersPets(req.body, function(err, result) {
+app.get('pets', function(req, res, next) {
+    dal.listProcedures(req.body, function(err, result) {
         res.status(200).send(result)
     })
 })
 
-app.get('/owners/:id/pets/:id', function(req, res, next) {
-    const ownerID = req.params.ownerid
-    const petID = req.params.petid
-    dal.getPet(req.body, function(err, result) {
+app.get('/procedures/:id', function(req, res, next) {
+    const procedureID = req.params.id
+    dal.getProcedure(procedureID, function(err, result) {
         res.status(200).send(result)
     })
 })
 
-app.put('/owner/:ownerid/pets/:petid', function(req, res, next) {
-    const ownerID = req.params.ownerid
-    const petID = req.params.petid
-    const owner = dal.getOwner(req.body, function(err, result) {
-        res.status(200).send(result)
-    })
-    dal.updatePet(req.body, function(err, result) {
+app.put('/procedures/:id', function(req, res, next) {
+    const procedureID = req.params.id
+    dal.updateProcedure(procedureID, function(err, result) {
         res.status(200).send(result)
     })
 })
 
-app.delete('/owner/:id/pets/:id', function(req, res, next) {
-    const ownerID = req.params.ownerid
-    const petID = req.params.petid
-    dal.deletePet(req.body, function(err, result) {
+app.delete('/procedures/:id', function(req, res, next) {
+    const procedureID = req.params.id
+    dal.deleteProcedure(procedureID, function(err, result) {
         res.status(200).send(result)
     })
 })
@@ -122,7 +94,7 @@ app.get('/glossary', function(req, res, next) {
 })
 
 app.get('/glossary/:id', function(req, res, next) {
-    const glossaryID = req.params.glossaryid
+    const glossaryID = req.params.id
     dal.getGlossaryWord(glossaryID, function(err, result) {
         res.status(200).send(result)
     })

@@ -17,6 +17,7 @@
     "http": "0.0.0",
     "node-http-error": "^1.0.0",
     "path": "^0.12.7",
+    "pouchdb-find": "^0.10.4",
     "pouchdb-http": "^6.0.2",
     "pouchdb-mapreduce": "^6.0.7",
     "url": "^0.11.0",

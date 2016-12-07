@@ -1,6 +1,7 @@
 const path = require('path')
 const PouchDB = require('pouchdb-http')
 PouchDB.plugin(require('pouchdb-mapreduce'))
+PouchDB.plugin(require('pouchdb-find'))
 const fetchConfig = require('zero-config')
 var config = fetchConfig(path.join(__dirname, '..'), {dcValue: 'test'})
 const urlFormat = require('url').format
@@ -9,44 +10,34 @@ require('dotenv').config();
 const db = new PouchDB(process.env.DB_URL)
 
 const dal = {
-    createOwner: createOwner, //done
-    listOwners: listOwners,
-    getOwner: getOwner, //done
-    updateOwner: updateOwner, //done
-    deleteOwner: deleteOwner, //done
-    /////////////////////////
-    createPet: createPet, //done
-    listOwnersPets: listPets,
+    createPet: createPet,
+    listPets: listPets,
     getPet: getPet,
     updatePet: updatePet,
     deletePet: deletePet,
-    updateOwnerwithPet: updateOwnerwithPet,
     /////////////////////////
-    createGlossaryItem: createGlossaryItem, //done
-    getGlossary: getGlossary,
-    getGlossaryWord: getGlossaryWord
+    createProcedure: createProcedure,
+    listProcedures: listProcedures,
+    getProcedure: getProcedure,
+    updateProcedure: updateProcedure,
+    deleteProcedure: deleteProcedure,
+    /////////////////////////
+    createCategory: createCategory,
+    listCategories: listCategories,
+    getCategory: getCategory,
+    updateCategory: updateCategory,
+    deleteCategory: deleteCategory
 }
 
-function createOwner(owner, callback) {
-    // const id = "owner_" + owner.ownerLastName + "_" + owner.ownerFirstName + "_" + owner.ownerEmail
-    // const ownerResponse = {
-    //     ok: true,
-    //     id: id,
-    //     rev: "1-30989284034985798u98473589027345"
-    // }
-    // return callback(null, ownerResponse)
+/////////////////////////////////////////////////////
+////////////// PET FUNCTIONS ////////////////////////
+/////////////////////////////////////////////////////
 
-    //example response
-    // {
-    //   "ok": true,
-    //   "id": "mydoc",
-    //   "rev": "1-84893984AKLJSLKJG24"
-    // }
-    owner.active = true
-    owner.type = 'owner'
-    owner._id = "owner_" + owner.ownerLastName + "_" + owner.ownerFirstName + "_" + owner.ownerEmail
-    owner.pets = []
-    db.post(owner, function(err, result) {
+function createPet(owner, callback) {
+    pet.active = true
+    pet.type = 'pet'
+    pet._id = "pet_" + pet.petName + "_" + pet.ownerLastName
+    db.post(pet, function(err, result) {
         if (err)
             return callback(err)
         if (result)
@@ -54,131 +45,40 @@ function createOwner(owner, callback) {
     })
 }
 
-function listOwners(owner, callback) {
-    const ownerResponse = [
-        {
-            ownerFirstName: "Joshua",
-            ownerLastName: "Smith",
-            ownerAddress: "5095 Stone Fence Dr, Colorado Springs, CO 80923",
-            ownerPhone: "307-262-6835",
-            ownerEmail: "joshua@smith.com",
-            type: "owner",
-            _id: "owner_smith_joshua_joshua@smith.com",
-            _rev: "2-c2e1681013626a82f7ebd35083b304a6"
-        }, {
-            ownerFirstName: "Joshua",
-            ownerLastName: "Smith",
-            ownerAddress: "5095 Stone Fence Dr, Colorado Springs, CO 80923",
-            ownerPhone: "307-262-6835",
-            ownerEmail: "joshua@smith.com",
-            type: "owner",
-            _id: "owner_smith_joshua_joshua@smith.com",
-            _rev: "2-c2e1681013626a82f7ebd35083b304a6"
+function listPets(pet, callback) {
+    db.find({
+        selector: {
+            type: {
+                $eq: 'pet'
+            }
         }
-    ]
-
-    return callback(null, ownerResponse)
+    }).then(function(result) {
+        return callback(null, result)
+    })
 }
 
-function getOwner(owner, callback) {
-    db.get(owner, function(err, result) {
+function getPet(pet, callback) {
+    db.get(pet, function(err, result) {
         if (err) {
             return console.log(err)
         }
         return callback(null, result)
     })
-    // const ownerResponse = {
-    //     ok: true,
-    //     _id: "owner_fake",
-    //     _rev: "1-30989284034985798u98473589027345"
-    // }
-    // return callback(null, ownerResponse)
 }
 
-function updateOwner(owner, callback) {
-    if (typeof owner == "undefined" || owner === null) {
-        return callback(new Error('400Missing owner for update'))
-    } else if (owner.hasOwnProperty('_id') !== true) {
-        return callback(new Error('400Missing id property from owner'))
+function updatePet(pet, callback) {
+    if (typeof pet == "undefined" || pet === null) {
+        return callback(new Error('400Missing pet for update'))
+    } else if (pet.hasOwnProperty('_id') !== true) {
+        return callback(new Error('400Missing id property from pet'))
     } else {
-        db.put(owner, function(err, result) {
+        db.put(pet, function(err, result) {
             if (err) {
                 return console.log(err)
             }
             return callback(null, result)
         })
     }
-}
-
-// function updateOwner(owner, callback) {
-//     const ownerResponse = {
-//         ok: true,
-//         _id: owner._id,
-//         _rev: "2-2849384938598453989485HI"
-//     }
-//     return callback(null, ownerResponse)
-// }
-
-function deleteOwner(owner, callback) {
-    // const ownerResponse = {
-    //     ok: true,
-    //     _id: owner._id,
-    //     _rev: "4-29284334958723948572093847520983457"
-    // }
-    // return callback(null, ownerResponse)
-    if (typeof owner == "undefined" || owner === null) {
-        return callback(new Error('400Missing owner for delete'))
-    } else if (owner.hasOwnProperty('_id') !== true) {
-        return callback(new Error('400Missing _id property from owner'))
-    } else if (owner.hasOwnProperty('_rev') !== true) {
-        return callback(new Error('400Missing _rev property from owner'))
-    } else {
-        db.remove(owner, function(err, response) {
-            if (err)
-                return callback(err)
-            if (response)
-                return callback(null, response);
-            }
-        )
-    }
-}
-
-function createPet(ownerID, pet, callback) {
-    // if (typeof pet == "undefined" || pet === null) {
-    //     return callback(new Error('400Missing pet to create'))
-    // } else if (pet.hasOwnProperty('_id') === true) {
-    //     return callback(new Error('400Unnecessary _id property within data. ' +
-    //         'createPerson() will generate a unique _id'))
-    // } else {
-    console.log('pet', pet)
-    pet.active = true
-    pet.type = 'pet'
-    pet._id = "pet_" + pet.petName + "_" + pet.ownerName
-    db.post(pet, function(err, result) {
-        if (err)
-            return callback(err)
-        if (result) {
-            return callback(null, result)
-        }
-    })
-}
-
-function getPet(pet, callback) {
-    // const petResponse = {
-    //     ok: true,
-    //     _id: "pet_fakeGet",
-    //     _rev: "1-30989284034985798u98473589027345"
-    // }
-    // return callback(null, petResponse)
-}
-
-function updatePet(pet, callback) {
-    const petResponse = {
-        ok: true,
-        _id: pet._id,
-        _rev: "2-2849384938598453989485HI"
-    }
-    return callback(null, petResponse)
 }
 
 function deletePet(pet, callback) {
@@ -199,305 +99,149 @@ function deletePet(pet, callback) {
     }
 }
 
-function listPets(pet, callback) {
-    const petResponse = [
-        {
-            "petId": "pet_dooley_smith",
-            "petName": "Dooley",
-            "petDOB": "2014-08-10",
-            "petSpeciesBreed": "Dog-Corgi",
-            "petMarkings": "Tan with white socks",
-            "petGender": "Male",
-            "petBreeder": "n/a",
-            "petDateAcquired": "08-10-2015",
-            "ownerID": "owner_smith_joshua_joshua@smith.com",
-            "type": "pet",
-            "petMedicalRecord": [
-                {
-                    "vaccineRecord": [
-                        {
-                            "type": "vaccineDog",
-                            "medID": "vac_Lyme_Disease",
-                            "vacName": "Lyme Disease",
-                            "administered": true,
-                            "administeredOn": "12-1-2015"
-                        }, {
-                            "type": "vaccineDog",
-                            "medID": "vac_Distemper",
-                            "vacName": "Distemper",
-                            "administered": true,
-                            "administeredOn": "12-1-2015"
-                        }, {
-                            "type": "vaccineDog",
-                            "medID": "vac_Adenovirus2",
-                            "vacName": "Adenovirus 2",
-                            "administered": true,
-                            "administeredOn": "12-1-2015"
-                        }, {
-                            "type": "vaccineDog",
-                            "medID": "vac_Parvovirus",
-                            "vacName": "Parvovirus",
-                            "administered": true,
-                            "administeredOn": "12-1-2015"
-                        }, {
-                            "type": "vaccineDog",
-                            "medID": "vac_Leptospirs",
-                            "vacName": "Leptospira",
-                            "administered": true,
-                            "administeredOn": "12-1-2015"
-                        }, {
-                            "type": "vaccineDog",
-                            "medID": "vac_Coronavirus",
-                            "vacName": "Coronavirus",
-                            "administered": true,
-                            "administeredOn": "12-1-2015"
-                        }, {
-                            "type": "vaccineDog",
-                            "medID": "vac_Bordetella",
-                            "vacName": "Bordetella",
-                            "administered": true,
-                            "administeredOn": "12-1-2015"
-                        }, {
-                            "type": "vaccineDog",
-                            "medID": "vac_Giardiasis",
-                            "vacName": "Giardiasis",
-                            "administered": true,
-                            "administeredOn": "12-1-2015"
-                        }, {
-                            "type": "vaccineCat",
-                            "medID": "vac_Leukemia",
-                            "vacName": "LeukemiaVirus",
-                            "administered": true,
-                            "administeredOn": "12-1-2015"
-                        }, {
-                            "type": "vaccineCat",
-                            "medID": "vac_Panleukopenia",
-                            "vacName": "Panleukopenia",
-                            "administered": true,
-                            "administeredOn": "12-1-2015"
-                        }, {
-                            "type": "vaccineCat",
-                            "medID": "vac_Calicivirus",
-                            "vacName": "Calicivirus",
-                            "administered": true,
-                            "administeredOn": "12-1-2015"
-                        }, {
-                            "type": "vaccineCat",
-                            "medID": "vac_Rhinotracheitis",
-                            "vacName": "Rhinotracheitis",
-                            "administered": true,
-                            "administeredOn": "12-1-2015"
-                        }, {
-                            "type": "vaccineCat",
-                            "medID": "vac_Pneumonitis",
-                            "vacName": "Pneumonitis",
-                            "administered": true,
-                            "administeredOn": "12-1-2015"
-                        }, {
-                            "type": "vaccineCat",
-                            "medID": "vac_FIP",
-                            "vacName": "FIP",
-                            "administered": true,
-                            "administeredOn": "12-1-2015"
-                        }, {
-                            "type": "vaccine",
-                            "medID": "vac_Rabies",
-                            "vacName": "Rabies",
-                            "administered": true,
-                            "administeredOn": "12-1-2015"
-                        }
-                    ],
-                    "labTestData": [
-                        {
-                            "type": "labTest",
-                            "medId": "labHeartworm",
-                            "labName": "Heartwork",
-                            "result": "negative",
-                            "injection": false,
-                            "comments": ""
-                        }, {
-                            "type": "labTest",
-                            "medId": "labLeukemiaFIV",
-                            "labName": "Leukemia/FIV",
-                            "result": "negative",
-                            "injection": false,
-                            "comments": ""
-                        }, {
-                            "type": "labTest",
-                            "medId": "labLymeDisease",
-                            "labName": "Lyme Disease",
-                            "result": "negative",
-                            "injection": false,
-                            "comments": ""
-                        }, {
-                            "type": "labTest",
-                            "medId": "labDeworming",
-                            "labName": "Deworming",
-                            "result": "negative",
-                            "injection": false,
-                            "comments": ""
-                        }
-                    ]
+/////////////////////////////////////////////////////
+////////////// PROCEDURE FUNCTIONS //////////////////
+/////////////////////////////////////////////////////
 
-                }
-            ]
-        }, {
-            "petId": "pet_seconddog_smith",
-            "petName": "second dog",
-            "petDOB": "2014-08-10",
-            "petSpeciesBreed": "Dog-Corgi",
-            "petMarkings": "Tan with white socks",
-            "petGender": "Male",
-            "petBreeder": "n/a",
-            "petDateAcquired": "08-10-2015",
-            "ownerID": "owner_smith_joshua_joshua@smith.com",
-            "type": "pet",
-            "petMedicalRecord": [
-                {
-                    "vaccineRecord": [
-                        {
-                            "type": "vaccineDog",
-                            "medID": "vac_Lyme_Disease",
-                            "vacName": "Lyme Disease",
-                            "administered": true,
-                            "administeredOn": "12-1-2015"
-                        }, {
-                            "type": "vaccineDog",
-                            "medID": "vac_Distemper",
-                            "vacName": "Distemper",
-                            "administered": true,
-                            "administeredOn": "12-1-2015"
-                        }, {
-                            "type": "vaccineDog",
-                            "medID": "vac_Adenovirus2",
-                            "vacName": "Adenovirus 2",
-                            "administered": true,
-                            "administeredOn": "12-1-2015"
-                        }, {
-                            "type": "vaccineDog",
-                            "medID": "vac_Parvovirus",
-                            "vacName": "Parvovirus",
-                            "administered": true,
-                            "administeredOn": "12-1-2015"
-                        }, {
-                            "type": "vaccineDog",
-                            "medID": "vac_Leptospirs",
-                            "vacName": "Leptospira",
-                            "administered": true,
-                            "administeredOn": "12-1-2015"
-                        }, {
-                            "type": "vaccineDog",
-                            "medID": "vac_Coronavirus",
-                            "vacName": "Coronavirus",
-                            "administered": true,
-                            "administeredOn": "12-1-2015"
-                        }, {
-                            "type": "vaccineDog",
-                            "medID": "vac_Bordetella",
-                            "vacName": "Bordetella",
-                            "administered": true,
-                            "administeredOn": "12-1-2015"
-                        }, {
-                            "type": "vaccineDog",
-                            "medID": "vac_Giardiasis",
-                            "vacName": "Giardiasis",
-                            "administered": true,
-                            "administeredOn": "12-1-2015"
-                        }, {
-                            "type": "vaccineCat",
-                            "medID": "vac_Leukemia",
-                            "vacName": "LeukemiaVirus",
-                            "administered": true,
-                            "administeredOn": "12-1-2015"
-                        }, {
-                            "type": "vaccineCat",
-                            "medID": "vac_Panleukopenia",
-                            "vacName": "Panleukopenia",
-                            "administered": true,
-                            "administeredOn": "12-1-2015"
-                        }, {
-                            "type": "vaccineCat",
-                            "medID": "vac_Calicivirus",
-                            "vacName": "Calicivirus",
-                            "administered": true,
-                            "administeredOn": "12-1-2015"
-                        }, {
-                            "type": "vaccineCat",
-                            "medID": "vac_Rhinotracheitis",
-                            "vacName": "Rhinotracheitis",
-                            "administered": true,
-                            "administeredOn": "12-1-2015"
-                        }, {
-                            "type": "vaccineCat",
-                            "medID": "vac_Pneumonitis",
-                            "vacName": "Pneumonitis",
-                            "administered": true,
-                            "administeredOn": "12-1-2015"
-                        }, {
-                            "type": "vaccineCat",
-                            "medID": "vac_FIP",
-                            "vacName": "FIP",
-                            "administered": true,
-                            "administeredOn": "12-1-2015"
-                        }, {
-                            "type": "vaccine",
-                            "medID": "vac_Rabies",
-                            "vacName": "Rabies",
-                            "administered": true,
-                            "administeredOn": "12-1-2015"
-                        }
-                    ],
-                    "labTestData": [
-                        {
-                            "type": "labTest",
-                            "medId": "labHeartworm",
-                            "labName": "Heartwork",
-                            "result": "negative",
-                            "injection": false,
-                            "comments": ""
-                        }, {
-                            "type": "labTest",
-                            "medId": "labLeukemiaFIV",
-                            "labName": "Leukemia/FIV",
-                            "result": "negative",
-                            "injection": false,
-                            "comments": ""
-                        }, {
-                            "type": "labTest",
-                            "medId": "labLymeDisease",
-                            "labName": "Lyme Disease",
-                            "result": "negative",
-                            "injection": false,
-                            "comments": ""
-                        }, {
-                            "type": "labTest",
-                            "medId": "labDeworming",
-                            "labName": "Deworming",
-                            "result": "negative",
-                            "injection": false,
-                            "comments": ""
-                        }
-                    ]
-
-                }
-            ]
-        }
-    ]
-    return callback(null, petResponse)
-}
-
-function updateOwnerwithPet(pet, owner, callback) {
-    petID = 'pet_' + pet + "_" + owner.ownerLastName
-    owner.pets.push(petID)
-    db.put(owner, function(err, result) {
+function createProcedure(procedure, callback) {
+    procedure.type = 'procedure'
+    procedure._id = "procedure_" + procedure.name
+    db.post(procedure, function(err, result) {
         if (err)
             return callback(err)
         if (result) {
-            console.log(result)
             return callback(null, result)
         }
     })
 }
+
+function listProcedures(procedure, callback) {
+    db.find({
+        selector: {
+            type: {
+                $eq: 'procedure'
+            }
+        }
+    }).then(function(result) {
+        return callback(null, result)
+    })
+}
+
+function getProcedure(procedure, callback) {
+    db.get(procedure, function(err, result) {
+        if (err) {
+            return console.log(err)
+        }
+        return callback(null, result)
+    })
+}
+
+function updateProcedure(procedure, callback) {
+    if (typeof procedure == "undefined" || procedure === null) {
+        return callback(new Error('400Missing procedure for update'))
+    } else if (procedure.hasOwnProperty('_id') !== true) {
+        return callback(new Error('400Missing id property from procedure'))
+    } else {
+        db.put(procedure, function(err, result) {
+            if (err) {
+                return console.log(err)
+            }
+            return callback(null, result)
+        })
+    }
+}
+
+function deleteProcedure(procedure, callback) {
+    if (typeof procedure == "undefined" || procedure === null) {
+        return callback(new Error('400Missing procedure for delete'))
+    } else if (procedure.hasOwnProperty('_id') !== true) {
+        return callback(new Error('400Missing _id property from procedure'))
+    } else if (procedure.hasOwnProperty('_rev') !== true) {
+        return callback(new Error('400Missing _rev property from procedure'))
+    } else {
+        db.remove(procedure, function(err, response) {
+            if (err)
+                return callback(err)
+            if (response)
+                return callback(null, response);
+            }
+        )
+    }
+}
+
+/////////////////////////////////////////////////////
+////////////// CATEGORY FUNCTIONS ///////////////////
+/////////////////////////////////////////////////////
+
+function createCategory(category, callback) {
+    category.type = 'category'
+    category._id = "category_" + category.name
+    db.post(category, function(err, result) {
+        if (err)
+            return callback(err)
+        if (result) {
+            return callback(null, result)
+        }
+    })
+}
+
+function listCategories(category, callback) {
+    db.find({
+        selector: {
+            type: {
+                $eq: 'category'
+            }
+        }
+    }).then(function(result) {
+        return callback(null, result)
+    })
+}
+
+function getCategory(category, callback) {
+    db.get(category, function(err, result) {
+        if (err) {
+            return console.log(err)
+        }
+        return callback(null, result)
+    })
+}
+
+function updateCategory(category, callback) {
+    if (typeof category == "undefined" || category === null) {
+        return callback(new Error('400Missing category for update'))
+    } else if (category.hasOwnProperty('_id') !== true) {
+        return callback(new Error('400Missing id property from category'))
+    } else {
+        db.put(category, function(err, result) {
+            if (err) {
+                return console.log(err)
+            }
+            return callback(null, result)
+        })
+    }
+}
+
+function deleteCategory(category, callback) {
+    if (typeof category == "undefined" || category === null) {
+        return callback(new Error('400Missing category for delete'))
+    } else if (category.hasOwnProperty('_id') !== true) {
+        return callback(new Error('400Missing _id property from category'))
+    } else if (category.hasOwnProperty('_rev') !== true) {
+        return callback(new Error('400Missing _rev property from category'))
+    } else {
+        db.remove(category, function(err, response) {
+            if (err)
+                return callback(err)
+            if (response)
+                return callback(null, response);
+            }
+        )
+    }
+}
+
+/////////////////////////////////////////////////////
+////////////// GLOSSARY FUNCTIONS //////////////////
+/////////////////////////////////////////////////////
 
 function createGlossaryItem(word, callback) {
     word.type = 'glossary'
@@ -510,25 +254,8 @@ function createGlossaryItem(word, callback) {
     })
 }
 
-function getGlossary(word, callback) {
-    const glossaryDefinition = [
-        {
-            word: "rabies",
-            definition: "rabies is bad"
-        }, {
-            word: "Bordetella",
-            definition: "a type of shot"
-        }
-    ]
-    return callback(null, glossaryDefinition)
-}
+function getGlossary(word, callback) {}
 
-function getGlossaryWord(word, callback) {
-    const glossaryDefinition = {
-        word: "lyme disease",
-        definition: "a disease dogs get through ticks"
-    }
-    return callback(null, glossaryDefinition)
-}
+function getGlossaryWord(word, callback) {}
 
 module.exports = dal
