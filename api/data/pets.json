@@ -1,0 +1,215 @@
+{
+  "petId": "pet_dooley_smith",
+  "petName": "Dooley",
+  "petDOB": "2014-08-10",
+  "petSpeciesBreed": "Dog-Corgi",
+  "petMarkings": "Tan with white socks",
+  "petGender": "Male",
+  "petBreeder": "n/a",
+  "petDateAcquired": "08-10-2015",
+  "ownerID": "owner_smith_joshua_joshua@smith.com",
+  "type": "pet",
+  "petMedicalRecord": [{
+    "vaccineRecord": [
+      {
+        "type": "vaccineDog",
+        "medID": "vac_Lyme_Disease",
+        "vacName": "Lyme Disease",
+        "administered": true,
+        "administeredOn": "12-1-2015"
+      },
+      {
+        "type": "vaccineDog",
+        "medID": "vac_Distemper",
+        "vacName": "Distemper",
+        "administered": true,
+        "administeredOn": "12-1-2015"
+      },
+      {
+        "type": "vaccineDog",
+        "medID": "vac_Adenovirus2",
+        "vacName": "Adenovirus 2",
+        "administered": true,
+        "administeredOn": "12-1-2015"
+      },
+      {
+        "type": "vaccineDog",
+        "medID": "vac_Parvovirus",
+        "vacName": "Parvovirus",
+        "administered": true,
+        "administeredOn": "12-1-2015"
+      },
+      {
+        "type": "vaccineDog",
+        "medID": "vac_Leptospirs",
+        "vacName": "Leptospira",
+        "administered": true,
+        "administeredOn": "12-1-2015"
+      },
+      {
+        "type": "vaccineDog",
+        "medID": "vac_Coronavirus",
+        "vacName": "Coronavirus",
+        "administered": true,
+        "administeredOn": "12-1-2015"
+      },
+      {
+        "type": "vaccineDog",
+        "medID": "vac_Bordetella",
+        "vacName": "Bordetella",
+        "administered": true,
+        "administeredOn": "12-1-2015"
+      },
+      {
+        "type": "vaccineDog",
+        "medID": "vac_Giardiasis",
+        "vacName": "Giardiasis",
+        "administered": true,
+        "administeredOn": "12-1-2015"
+      },
+      {
+        "type": "vaccineCat",
+        "medID": "vac_Leukemia",
+        "vacName": "LeukemiaVirus",
+        "administered": true,
+        "administeredOn": "12-1-2015"
+      },
+      {
+        "type": "vaccineCat",
+        "medID": "vac_Panleukopenia",
+        "vacName": "Panleukopenia",
+        "administered": true,
+        "administeredOn": "12-1-2015"
+      },
+      {
+        "type": "vaccineCat",
+        "medID": "vac_Calicivirus",
+        "vacName": "Calicivirus",
+        "administered": true,
+        "administeredOn": "12-1-2015"
+      },
+      {
+        "type": "vaccineCat",
+        "medID": "vac_Rhinotracheitis",
+        "vacName": "Rhinotracheitis",
+        "administered": true,
+        "administeredOn": "12-1-2015"
+      },
+      {
+        "type": "vaccineCat",
+        "medID": "vac_Pneumonitis",
+        "vacName": "Pneumonitis",
+        "administered": true,
+        "administeredOn": "12-1-2015"
+      },
+      {
+        "type": "vaccineCat",
+        "medID": "vac_FIP",
+        "vacName": "FIP",
+        "administered": true,
+        "administeredOn": "12-1-2015"
+      },
+      {
+        "type": "vaccine",
+        "medID": "vac_Rabies",
+        "vacName": "Rabies",
+        "administered": true,
+        "administeredOn": "12-1-2015"
+      }
+    ],
+    "labTestData": [
+      {
+        "type": "labTest",
+        "medId": "labHeartworm",
+        "labName": "Heartwork",
+        "result": "negative",
+        "injection": false,
+        "comments": ""
+      },
+      {
+        "type": "labTest",
+        "medId": "labLeukemiaFIV",
+        "labName": "Leukemia/FIV",
+        "result": "negative",
+        "injection": false,
+        "comments": ""
+      },
+      {
+        "type": "labTest",
+        "medId": "labLymeDisease",
+        "labName": "Lyme Disease",
+        "result": "negative",
+        "injection": false,
+        "comments": ""
+      },
+      {
+        "type": "labTest",
+        "medId": "labDeworming",
+        "labName": "Deworming",
+        "result": "negative",
+        "injection": false,
+        "comments": ""
+      }
+    ]
+
+  }
+  ]
+}
+
+/*{
+  "_id": "pet_dooley_smith",
+  "owner_ID": "smith_joshua",
+  "name": "Dooley",
+  "DOB": "2014-08-10",
+  "speciesBreed": "dog-corgi",
+  "markings": "tan and white, white socks",
+  "gender": "male",
+  "breeder": "n/a",
+  "date acquired": "2015-08-05",
+  "medical": [
+    {"vaccination": [
+      {
+        "name": "Lyme Disease",
+        "administered": "true",
+        "dateGiven": "12/1/2015"
+      },
+      {
+        "name": "Distemper",
+        "administered": "true",
+        "dateGiven": "12/1/2015"
+      },
+      {
+        "name": "Adenovirus 2",
+        "administered": "true",
+        "dateGiven": "12/1/2015"
+      },
+      {
+        "name": "Parvovirus",
+        "administered": "true",
+        "dateGiven": "12/1/2015"
+      },
+      {
+        "name": "Leptospira",
+        "administered": "true",
+        "dateGiven": "12/1/2015"
+      },
+      {
+        "name": "Coronavirus",
+        "administered": "true",
+        "dateGiven": "12/1/2015"
+      },
+      {
+        "name": "Bordetella",
+        "administered": "true",
+        "dateGiven": "12/1/2015"
+      },
+      {
+        "name": "Giardiasis",
+        "administered": "true",
+        "dateGiven": "12/1/2015"
+      },
+    ]
+      }
+  ],
+  "type": "pet"
+}*/

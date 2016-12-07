@@ -1,0 +1,11 @@
+{
+  "_id": "owner_smith_joshua_joshua@smith.com",
+  "ownerName": "Joshua Smith",
+  "ownerAddress": "5095 Stone Fence Dr, Colorado Springs, CO 80923",
+  "ownerPhone": "307-262-6835",
+  "ownerEmail": "joshua@smith.com",
+  "type": "owner",
+  "pets": {
+    "petID": "pet_dooley_smith"
+  }
+}

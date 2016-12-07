@@ -1,0 +1,17 @@
+{
+  "_id": "owner_smith_pet_dooley_vac",
+  "type": "medical",
+  "vaccinations": [
+    { "vacID": "vac_Lyme_Disease",
+      "administered": "true",
+      "administeredOn": "2016-05-13"
+      ""}
+  ],
+}
+
+{
+  "_id": "vac_Lyme_Disease",
+  "type": "vaccination",
+  "frequency": "yearly",
+  "species": "dog"
+}
