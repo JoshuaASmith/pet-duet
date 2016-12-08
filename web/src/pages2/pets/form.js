@@ -3,6 +3,8 @@ const {Link, Redirect} = require('react-router')
 const data = require('../../utils/data')()
 const TextField = require('../../components/text-field')
 
+console.log(process.env.REACT_APP_API)
+
 const PetsForm = React.createClass({
     getInitialState() {
         return {
@@ -60,15 +62,11 @@ const PetsForm = React.createClass({
                 <h1 className="f1 fw1">{formState + ' '}
                     Pet</h1>
                 <form onSubmit={this.handleSubmit}>
-                    <div>
-                        <label>Name</label>
-                        <input value={this.state.pet.petName} onChange={this.handleChange('petName')}/>
-                    </div>
+                    <TextField label="Pet Name" value={this.state.pet.petName} onChange={this.handleChange('petName')}/>
                     <TextField label="Owner Last Name" value={this.state.pet.ownerLastName} onChange={this.handleChange('ownerLastName')}/>
                     <TextField label="Owner First Name" value={this.state.pet.ownerFirstName} onChange={this.handleChange('ownerFirstName')} type="text"/>
                     <TextField label="Pet Date of Birth" value={this.state.pet.petDOB} onChange={this.handleChange('petDOB')}/>
                     <TextField label="Species/Breed" value={this.state.pet.petSpeciesBreed} onChange={this.handleChange('petSpeciesBreed')}/>
-
                     <div>
                         <button>Submit</button>
                     </div>

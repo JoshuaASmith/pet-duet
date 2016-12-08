@@ -59,10 +59,7 @@ const ProceduresForm = React.createClass({
                 <h1 className="f1 fw1">{formState + ' '}
                     Procedure</h1>
                 <form onSubmit={this.handleSubmit}>
-                    <div>
-                        <label>Procedure</label>
-                        <input value={this.state.procedure.procedure} onChange={this.handleChange('procedure')}/>
-                    </div>
+                    <TextField label="Procedure" value={this.state.procedure.procedure} onChange={this.handleChange('procedure')}/>
                     <TextField label="Type of Procedure" value={this.state.procedure.typeofProcedure} onChange={this.handleChange('typeofProcedure')}/>
                     <TextField label="Date of Procedure" value={this.state.procedure.datePerformed} onChange={this.handleChange('datePerformed')} type="date"/>
                     <div>
