@@ -7,7 +7,7 @@ module.exports = function() {
     }
     const post = function(model, doc) {
         return fetch(`${url}/${model}`, {
-            method: 'post',
+            method: 'POST',
             body: JSON.stringify(doc),
             headers: {
                 'content-type': 'application/json'

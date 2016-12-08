@@ -26,6 +26,7 @@ const App = React.createClass({
                     <Match pattern="/pets/:id/show" component={ShowPet}/>
                     <Match exactly pattern="/procedures" component={Procedures}/>
                     <Match exactly pattern="/procedures/new" component={ProceduresForm}/>
+                    <Match exactly pattern="/procedures/:id/edit" component={ProceduresForm}/>
                     <Match pattern="/procedures/:id/show" component={ShowProcedure}/>
                     <Match exactly pattern="/categories" component={Categories}/>
                     <Match exactly pattern="/categories/new" component={CategoriesForm}/>

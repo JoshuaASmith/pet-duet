@@ -1,7 +1,6 @@
 const React = require('react')
 const {Link, Redirect} = require('react-router')
 const data = require('../../utils/data')()
-const TextField = require('../../components/text-field')
 
 const CategoriesForm = React.createClass({
     getInitialState() {
@@ -27,22 +26,25 @@ const CategoriesForm = React.createClass({
         e.preventDefault()
         if (this.state.category._id) {
             data.put('categories', this.state.category._id, this.state.category).then(category => {
-                this.setState({category})
+                this.setState({resolved: true})
             })
         } else {
-            data.post('categories', this.state.category).then(res => this.setState({resolved: true}))
+            data.post('categories', this.state.category).then(res => {
+                this.setState({resolved: true})
+            }).catch(err => console.log(err))
+
         }
     },
     render() {
-        const formState = this.state.category.id
+        const formState = this.state.category._id
             ? 'Edit'
             : 'New'
         return (
             <div className="pa2">
-                {this.state.resolved && this.state.id
-                    ? <Redirect to={`/categories/${this.state.id}/show`}/>
+                {this.state.resolved && this.state._id
+                    ? <Redirect to={`/categories/${this.state._id}/show`}/>
                     : null}
-                {this.state.resolved && !this.state.id
+                {this.state.resolved && !this.state._id
                     ? <Redirect to={`/categories`}/>
                     : null}
                 <h1 className="f1 fw1">{formState + ' '}

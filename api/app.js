@@ -116,6 +116,7 @@ app.delete('/procedures/:id', function(req, res, next) {
 
 app.post('/categories', function(req, res, next) {
     dal.createCategory(req.body, function(err, result) {
+        console.log(err)
         res.status(201).send(result)
     })
 })

@@ -19,6 +19,13 @@ const ProceduresForm = React.createClass({
             resolved: false
         }
     },
+    componentDidMount() {
+        if (this.props.params.id) {
+            data.get('procedures', this.props.params.id).then(procedure => {
+                this.setState({procedure})
+            })
+        }
+    },
     handleChange(field) {
         return (e) => {
             let procedure = {

@@ -188,7 +188,7 @@ function deleteProcedure(procedure, callback) {
 
 function createCategory(category, callback) {
     category.type = 'category'
-    category._id = "category_" + category.name
+    category._id = "category_" + category.category
     db.post(category, function(err, result) {
         if (err)
             return callback(err)
