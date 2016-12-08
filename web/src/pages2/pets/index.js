@@ -13,7 +13,7 @@ const Pets = React.createClass({
     },
     render() {
         const li = pet => <li key={pet._id}>
-            <Link to={`/pets/${pet._id}/show`}>{pet.petName + pet.ownerLastName}</Link>
+            <Link to={`/pets/${pet._id}/show`}>{pet.petName + ' ' + pet.ownerLastName}</Link>
         </li>
         return (
             <div>

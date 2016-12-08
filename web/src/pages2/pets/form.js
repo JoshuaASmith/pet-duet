@@ -20,6 +20,13 @@ const PetsForm = React.createClass({
             resolved: false
         }
     },
+    componentDidMount() {
+        if (this.props.params.id) {
+            data.get('pets', this.props.params.id).then(pet => {
+                this.setState({pet})
+            })
+        }
+    },
     handleChange(field) {
         return (e) => {
             let pet = {
@@ -31,15 +38,27 @@ const PetsForm = React.createClass({
     },
     handleSubmit(e) {
         e.preventDefault()
-        data.post('pets', this.state.pet).then(res => this.setState({resolved: true}))
+        if (this.state.pet._id) {
+            data.put('pets', this.state.pet._id, this.state.pet).then(pet => {
+                this.setState({resolved: true})
+            })
+        } else {
+            data.post('pets', this.state.pet).then(res => {
+                this.setState({resolved: true})
+            }).catch(err => console.log(err))
+        }
     },
     render() {
+        const formState = this.state.pet._id
+            ? 'Edit'
+            : 'New'
         return (
             <div className="pa2">
                 {this.state.resolved
                     ? <Redirect to="/pets"/>
                     : null}
-                <h1>New Pet</h1>
+                <h1 className="f1 fw1">{formState + ' '}
+                    Pet</h1>
                 <form onSubmit={this.handleSubmit}>
                     <div>
                         <label>Name</label>

@@ -37,15 +37,27 @@ const ProceduresForm = React.createClass({
     },
     handleSubmit(e) {
         e.preventDefault()
-        data.post('procedures', this.state.procedure).then(res => this.setState({resolved: true}))
+        if (this.state.procedure._id) {
+            data.put('procedures', this.state.procedure._id, this.state.procedure).then(procedure => {
+                this.setState({resolved: true})
+            })
+        } else {
+            data.post('procedures', this.state.procedure).then(res => {
+                this.setState({resolved: true})
+            }).catch(err => console.log(err))
+        }
     },
     render() {
+        const formState = this.state.procedure._id
+            ? 'Edit'
+            : 'New'
         return (
             <div className="pa2">
                 {this.state.resolved
                     ? <Redirect to="/procedures"/>
                     : null}
-                <h1>New Procedure</h1>
+                <h1 className="f1 fw1">{formState + ' '}
+                    Procedure</h1>
                 <form onSubmit={this.handleSubmit}>
                     <div>
                         <label>Procedure</label>

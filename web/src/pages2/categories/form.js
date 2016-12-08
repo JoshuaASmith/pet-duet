@@ -32,7 +32,6 @@ const CategoriesForm = React.createClass({
             data.post('categories', this.state.category).then(res => {
                 this.setState({resolved: true})
             }).catch(err => console.log(err))
-
         }
     },
     render() {
