@@ -28,8 +28,11 @@ const ShowProcedure = React.createClass({
                     : null}
                 <h3 className="fw1 f2 tc">Procedure</h3>
                 <hr className="w-50 tl b--dark-blue"/>
-                <h3>{this.state.procedure._id}</h3>
-                <h3>{this.state.procedure.procedure}</h3>
+                <div className="tc">
+                    <h3>{this.state.procedure._id}</h3>
+                    <h3>{this.state.procedure.procedure}</h3>
+                    <h3>{this.state.procedure.datePerformed}</h3>
+                </div>
                 <button className="f6 fw1 link dim br2 ba ph3 pv2 mt3 mb2 db black center">
                     <Link className="no-underline black hover-bg-moon-gray mb2" to={`/procedures/${this.state.procedure._id}/edit`}>Edit Procedure Record</Link>
                 </button>

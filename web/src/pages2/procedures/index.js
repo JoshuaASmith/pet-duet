@@ -23,6 +23,9 @@ const Procedures = React.createClass({
                 <ul>
                     {this.state.procedures.map(li)}
                 </ul>
+                <Link to="/procedures/new">
+                    <button>New Procedure</button>
+                </Link>
                 <Link to="/">Home</Link>
             </div>
         )

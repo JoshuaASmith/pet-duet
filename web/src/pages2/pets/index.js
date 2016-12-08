@@ -23,6 +23,9 @@ const Pets = React.createClass({
                 <Link to="/pets/new">
                     <button>New Pet</button>
                 </Link>
+                <Link to="/">
+                    <button>Home</button>
+                </Link>
             </div>
         )
     }

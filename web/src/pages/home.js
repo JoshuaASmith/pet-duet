@@ -6,7 +6,20 @@ const Home = React.createClass({
         return (
             <div>
                 <h1>Home</h1>
-                <Link to="About">About</Link>
+                <ul>
+                    <li>
+                        <Link to="/about">About</Link>
+                    </li>
+                    <li>
+                        <Link to="/pets">Pets</Link>
+                    </li>
+                    <li>
+                        <Link to="/procedures">Procedures</Link>
+                    </li>
+                    <li>
+                        <Link to="/categories">Categories</Link>
+                    </li>
+                </ul>
             </div>
         )
     }

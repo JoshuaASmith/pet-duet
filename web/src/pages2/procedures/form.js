@@ -8,7 +8,7 @@ const {Link, Redirect} = require('react-router')
 const data = require('../../utils/data')()
 const TextField = require('../../components/text-field')
 
-const ProcedureForm = React.createClass({
+const ProceduresForm = React.createClass({
     getInitialState() {
         return {
             procedure: {
@@ -45,7 +45,7 @@ const ProcedureForm = React.createClass({
                         <input value={this.state.procedure.procedure} onChange={this.handleChange('procedure')}/>
                     </div>
                     <TextField label="Type of Procedure" value={this.state.procedure.typeofProcedure} onChange={this.handleChange('typeofProcedure')}/>
-
+                    <TextField label="Date of Procedure" value={this.state.procedure.datePerformed} onChange={this.handleChange('datePerformed')} type="date"/>
                     <div>
                         <button>Submit</button>
                     </div>
@@ -57,4 +57,4 @@ const ProcedureForm = React.createClass({
     }
 })
 
-module.exports = PetsForm
+module.exports = ProceduresForm
