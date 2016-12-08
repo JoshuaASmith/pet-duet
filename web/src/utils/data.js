@@ -14,6 +14,15 @@ module.exports = function() {
             }
         }).then(res => res.json())
     }
+    const put = function(model, id, doc) {
+        return fetch(`${url}/${model}/${id}`, {
+            method: 'PUT',
+            body: JSON.stringify(doc),
+            headers: {
+                'content-type': 'application/json'
+            }
+        }).then(res => res.json())
+    }
     const get = function(model, id) {
         return fetch(`${url}/${model}/${id}`).then(response => response.json()).then(json => {
             return json
@@ -27,5 +36,5 @@ module.exports = function() {
         }
     }).then(res => res.json())
 
-    return {list, post, get, remove}
+    return {list, post, get, remove, put}
 }

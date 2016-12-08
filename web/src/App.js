@@ -22,12 +22,14 @@ const App = React.createClass({
                     <Match exactly pattern="/about" component={About}/>
                     <Match exactly pattern="/pets" component={Pets}/>
                     <Match exactly pattern="/pets/new" component={PetsForm}/>
+                    <Match exactly pattern="/pets/:id/edit" component={PetsForm}/>
                     <Match pattern="/pets/:id/show" component={ShowPet}/>
                     <Match exactly pattern="/procedures" component={Procedures}/>
                     <Match exactly pattern="/procedures/new" component={ProceduresForm}/>
                     <Match pattern="/procedures/:id/show" component={ShowProcedure}/>
                     <Match exactly pattern="/categories" component={Categories}/>
                     <Match exactly pattern="/categories/new" component={CategoriesForm}/>
+                    <Match exactly pattern="/categories/:id/edit" component={CategoriesForm}/>
                     <Match pattern="/categories/:id/show" component={ShowCategory}/>
                 </div>
             </BrowserRouter>

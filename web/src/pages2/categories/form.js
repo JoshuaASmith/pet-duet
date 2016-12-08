@@ -5,11 +5,13 @@ const TextField = require('../../components/text-field')
 
 const CategoriesForm = React.createClass({
     getInitialState() {
-        return {
-            category: {
-                category: ''
-            },
-            resolved: false
+        return {category: {}, resolved: false, success: false}
+    },
+    componentDidMount() {
+        if (this.props.params.id) {
+            data.get('categories', this.props.params.id).then(category => {
+                this.setState({category})
+            })
         }
     },
     handleChange(field) {
@@ -23,22 +25,35 @@ const CategoriesForm = React.createClass({
     },
     handleSubmit(e) {
         e.preventDefault()
-        data.post('categories', this.state.category).then(res => this.setState({resolved: true}))
+        if (this.state.category._id) {
+            data.put('categories', this.state.category._id, this.state.category).then(category => {
+                this.setState({category})
+            })
+        } else {
+            data.post('categories', this.state.category).then(res => this.setState({resolved: true}))
+        }
     },
     render() {
+        const formState = this.state.category.id
+            ? 'Edit'
+            : 'New'
         return (
             <div className="pa2">
-                {this.state.resolved
-                    ? <Redirect to="/categories"/>
+                {this.state.resolved && this.state.id
+                    ? <Redirect to={`/categories/${this.state.id}/show`}/>
                     : null}
-                <h1>New Category</h1>
+                {this.state.resolved && !this.state.id
+                    ? <Redirect to={`/categories`}/>
+                    : null}
+                <h1 className="f1 fw1">{formState + ' '}
+                    Category</h1>
                 <form onSubmit={this.handleSubmit}>
                     <div>
                         <label>Category</label>
                         <input value={this.state.category.category} onChange={this.handleChange('category')}/>
                     </div>
                     <div>
-                        <button>Submit</button>
+                        <button>Save Category</button>
                     </div>
                     <Link to="/categories">Return</Link>
                 </form>
