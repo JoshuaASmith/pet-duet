@@ -16,9 +16,16 @@ module.exports = function() {
     }
     const get = function(model, id) {
         return fetch(`${url}/${model}/${id}`).then(response => response.json()).then(json => {
-            console.log(json)
             return json
         })
     }
-    return {list, post, get}
+    const remove = (model, id, doc) => fetch(`${url}/${model}/${id}`, {
+        method: "DELETE",
+        body: JSON.stringify(doc),
+        headers: {
+            'content-type': 'application/json'
+        }
+    }).then(res => res.json())
+
+    return {list, post, get, remove}
 }

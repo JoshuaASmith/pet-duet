@@ -5,6 +5,8 @@ const About = require('./pages/about')
 const Pets = require('./pages2/pets/index')
 const PetsForm = require('./pages2/pets/form')
 const ShowPet = require('./pages2/pets/show')
+const Procedures = require('./pages2/procedures/index')
+const ShowProcedure = require('./pages2/procedures/show')
 
 const App = React.createClass({
     render() {
@@ -17,6 +19,8 @@ const App = React.createClass({
                     <Match exactly pattern="/pets" component={Pets}/>
                     <Match exactly pattern="/pets/new" component={PetsForm}/>
                     <Match pattern="/pets/:id/show" component={ShowPet}/>
+                    <Match exactly pattern="/procedures" component={Procedures}/>
+                    <Match pattern="/procedures/:id/show" component={ShowProcedure}/>
                 </div>
             </BrowserRouter>
         )
