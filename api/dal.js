@@ -10,30 +10,36 @@ require('dotenv').config();
 const db = new PouchDB(process.env.DB_URL)
 
 const dal = {
-    createPet: createPet,
-    listPets: listPets,
-    getPet: getPet,
-    updatePet: updatePet,
-    deletePet: deletePet,
+    createPet: createPet, //done
+    listPets: listPets, //done
+    getPet: getPet, //done
+    updatePet: updatePet, //done
+    deletePet: deletePet, //done
     /////////////////////////
-    createProcedure: createProcedure,
-    listProcedures: listProcedures,
-    getProcedure: getProcedure,
-    updateProcedure: updateProcedure,
-    deleteProcedure: deleteProcedure,
+    createProcedure: createProcedure, //done
+    listProcedures: listProcedures, //done
+    getProcedure: getProcedure, //done
+    updateProcedure: updateProcedure, //done
+    deleteProcedure: deleteProcedure, //done
     /////////////////////////
-    createCategory: createCategory,
-    listCategories: listCategories,
-    getCategory: getCategory,
-    updateCategory: updateCategory,
-    deleteCategory: deleteCategory
+    createCategory: createCategory, //done
+    listCategories: listCategories, //done
+    getCategory: getCategory, //done
+    updateCategory: updateCategory, //done
+    deleteCategory: deleteCategory, //done
+    //////////////////////////
+    createGlossaryItem: createGlossaryItem, //done
+    getGlossary: getGlossary, //done
+    getGlossaryItem: getGlossaryItem, //done
+    updateGlossaryItem: updateGlossaryItem, //done
+    deleteGlossaryItem: deleteGlossaryItem //done
 }
 
 /////////////////////////////////////////////////////
 ////////////// PET FUNCTIONS ////////////////////////
 /////////////////////////////////////////////////////
 
-function createPet(owner, callback) {
+function createPet(pet, callback) {
     pet.active = true
     pet.type = 'pet'
     pet._id = "pet_" + pet.petName + "_" + pet.ownerLastName
@@ -72,13 +78,20 @@ function updatePet(pet, callback) {
     } else if (pet.hasOwnProperty('_id') !== true) {
         return callback(new Error('400Missing id property from pet'))
     } else {
-        db.put(pet, function(err, result) {
-            if (err) {
+        db.put(pet, function(err, response) {
+            if (err)
                 return console.log(err)
+            if (response) {
+                console.log(response)
+                return callback(null, response)
             }
-            return callback(null, result)
         })
     }
+    // db.put(pet).then(function(response) {
+    //     return response
+    // }).catch(function(err) {
+    //     console.log(err)
+    // })
 }
 
 function deletePet(pet, callback) {
@@ -254,8 +267,58 @@ function createGlossaryItem(word, callback) {
     })
 }
 
-function getGlossary(word, callback) {}
+function getGlossary(word, callback) {
+    db.find({
+        selector: {
+            type: {
+                $eq: 'glossary'
+            }
+        }
+    }).then(function(result) {
+        return callback(null, result)
+    })
+}
 
-function getGlossaryWord(word, callback) {}
+function getGlossaryItem(word, callback) {
+    db.get(word, function(err, result) {
+        if (err) {
+            return console.log(err)
+        }
+        return callback(null, result)
+    })
+}
+
+function updateGlossaryItem(word, callback) {
+    if (typeof word == "undefined" || word === null) {
+        return callback(new Error('400Missing word for update'))
+    } else if (word.hasOwnProperty('_id') !== true) {
+        return callback(new Error('400Missing id property from word'))
+    } else {
+        db.put(word, function(err, result) {
+            if (err) {
+                return console.log(err)
+            }
+            return callback(null, result)
+        })
+    }
+}
+
+function deleteGlossaryItem(word, callback) {
+    if (typeof word == "undefined" || word === null) {
+        return callback(new Error('400Missing word for delete'))
+    } else if (word.hasOwnProperty('_id') !== true) {
+        return callback(new Error('400Missing _id property from word'))
+    } else if (word.hasOwnProperty('_rev') !== true) {
+        return callback(new Error('400Missing _rev property from word'))
+    } else {
+        db.remove(word, function(err, response) {
+            if (err)
+                return callback(err)
+            if (response)
+                return callback(null, response);
+            }
+        )
+    }
+}
 
 module.exports = dal
