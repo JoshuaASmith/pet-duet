@@ -1,13 +1,12 @@
 const React = require('react')
-const {Button} = require('rebass')
 
 const ButtonComponent = React.createClass({
     render() {
         return (
             <div className="dim tc">
-                <Button backgroundColor="gray" color="dark-gray" inverted rounded big>
+                <button className="f6 fw1 link dim br2 ba ph3 pv2 mt3 mb2 db black center">
                     {this.props.title}
-                </Button>
+                </button>
             </div>
         )
     }

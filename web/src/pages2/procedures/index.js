@@ -3,6 +3,7 @@
 const React = require('react')
 const data = require('../../utils/data')()
 const {Link} = require('react-router')
+const ButtonComponent = require('../../components/button-save')
 
 const Procedures = React.createClass({
     getInitialState() {
@@ -19,14 +20,16 @@ const Procedures = React.createClass({
         </li>
         return (
             <div>
-                <h1>Procedure</h1>
+                <h1>Procedures</h1>
                 <ul>
                     {this.state.procedures.map(li)}
                 </ul>
                 <Link to="/procedures/new">
-                    <button>New Procedure</button>
+                    <ButtonComponent title="New Procedures"/>
                 </Link>
-                <Link to="/">Home</Link>
+                <Link to="/">
+                    <ButtonComponent title="New Home"/>
+                </Link>
             </div>
         )
     }

@@ -25,7 +25,7 @@ const Categories = React.createClass({
                 <Link to="/categories/new">
                     <ButtonComponent title="New Category"></ButtonComponent>
                 </Link>
-                <Link to="/">Home</Link>
+                <Link to="/"><ButtonComponent title="Home"/></Link>
             </div>
         )
     }

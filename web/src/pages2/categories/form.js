@@ -55,7 +55,7 @@ const CategoriesForm = React.createClass({
                     <div>
                         <ButtonComponent title="Save"/>
                     </div>
-                    <Link to="/categories">Return</Link>
+                    <Link to="/categories"><ButtonComponent title="Return"/></Link>
                 </form>
 
             </div>

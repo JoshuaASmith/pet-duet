@@ -45,18 +45,10 @@ const ShowPet = React.createClass({
                     </tbody> */}
                 </div>
                 <div className="">
-                    <ButtonComponent title="Edit Pet Record">
-                        <Link to={`/pets/${this.state.pet._id}/edit`}></Link>
-                    </ButtonComponent>
-                    <ButtonComponent title=" New  Procedure ">
-                        <Link to="/procedures/new"></Link>
-                    </ButtonComponent>
-                    <ButtonComponent title="Remove Pet">
-                        <a href="#" onClick={this.handleRemove}>Remove Pet</a>
-                    </ButtonComponent>
-                    <ButtonComponent title="Return">
-                        <Link to="/pets">Return</Link>
-                    </ButtonComponent>
+                    <Link to={`/pets/${this.state.pet._id}/edit`}><ButtonComponent title="Edit Pet Record"/></Link>
+                    <Link to="/procedures/new"><ButtonComponent title="New Procedure"/></Link>
+                    <a href="#" onClick={this.handleRemove}><ButtonComponent title="Remove Pet"/></a>
+                    <Link to="/pets"><ButtonComponent title="Return"/></Link>
                 </div>
             </div>
         )

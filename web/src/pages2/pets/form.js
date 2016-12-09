@@ -97,7 +97,7 @@ const PetsForm = React.createClass({
                     <div>
                         <ButtonComponent title="Save"/>
                     </div>
-                    <Link to="/pets">Return</Link>
+                    <Link to="/pets"><ButtonComponent title="Return"/></Link>
                 </form>
 
             </div>

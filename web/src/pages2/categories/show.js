@@ -34,11 +34,9 @@ const ShowCategory = React.createClass({
                     <h3>{this.state.category._id}</h3>
                     <h3>{this.state.category.category}</h3>
                 </div>
-                <ButtonComponent title="Edit Category">
-                    <Link to={`/categories/${this.state.category._id}/edit`}>Edit Category</Link>
-                </ButtonComponent>
+                <Link to={`/categories/${this.state.category._id}/edit`}><ButtonComponent title="Edit Category"/></Link>
                 <a href="#" onClick={this.handleRemove}>Remove Category</a>
-                <Link to="/categories">Return</Link>
+                <Link to="/categories"><ButtonComponent title="Return"/></Link>
             </div>
         )
     }

@@ -34,9 +34,7 @@ const ShowProcedure = React.createClass({
                     <h3>{this.state.procedure.procedure}</h3>
                     <h3>{this.state.procedure.datePerformed}</h3>
                 </div>
-                <ButtonComponent title="Edit Procedure Record">
-                    <Link to={`/procedures/${this.state.procedure._id}/edit`}></Link>
-                </ButtonComponent>
+                <Link to={`/procedures/${this.state.procedure._id}/edit`}><ButtonComponent title="Edit Procedure Record"/></Link>
                 <a href="#" onClick={this.handleRemove}>Remove Procedure</a>
                 <Link to="/procedures">Return</Link>
             </div>

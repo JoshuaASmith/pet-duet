@@ -77,11 +77,10 @@ const ProceduresForm = React.createClass({
                     Procedure</h1>
                 <form onSubmit={this.handleSubmit}>
                     <TextField label="Procedure" value={this.state.procedure.procedure} onChange={this.handleChange('procedure')}/>
-                    <TextField label="Type of Procedure" value={this.state.procedure.typeofProcedure} onChange={this.handleChange('typeofProcedure')}/>
                     <TextField label="Date of Procedure" value={this.state.procedure.datePerformed} onChange={this.handleChange('datePerformed')} type="date"/>
                     <TextField label="Pet" value={this.state.procedure.petName} onChange={this.handleChange('petName')}/>
                     <div>
-                        <label>Category</label>
+                        <label>Procedure Category</label>
                         <select value={this.state.categories._id} onChange={this.handleSelect}>
                             <option value="-1">Select</option>
                             {this.state.categories.map(category => <option key={category._id} value={category._id}>{category.category}</option>)}

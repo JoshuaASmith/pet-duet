@@ -1,6 +1,7 @@
 const React = require('react')
 const {Link} = require('react-router')
 const data = require('../../utils/data')()
+const ButtonComponent = require('../../components/button-save')
 
 const Pets = React.createClass({
     getInitialState() {
@@ -21,10 +22,10 @@ const Pets = React.createClass({
                     {this.state.pets.map(li)}
                 </ul>
                 <Link to="/pets/new">
-                    <button>New Pet</button>
+                    <ButtonComponent title="New Pet"/>
                 </Link>
                 <Link to="/">
-                    <button>Home</button>
+                    <ButtonComponent title="Home"/>
                 </Link>
             </div>
         )
