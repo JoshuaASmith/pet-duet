@@ -2,6 +2,7 @@ const React = require('react')
 const {Link, Redirect} = require('react-router')
 const data = require('../../utils/data')()
 const TextField = require('../../components/text-field')
+const ButtonComponent = require('../../components/button-save')
 
 console.log(process.env.REACT_APP_API)
 
@@ -17,12 +18,17 @@ const PetsForm = React.createClass({
                 petMarkings: '',
                 petGender: '',
                 petBreeder: '',
-                petDateAcquired: ''
+                petDateAcquired: '',
+                procedure: {
+                    id: -1
+                }
             },
+            procedures: [],
             resolved: false
         }
     },
     componentDidMount() {
+        data.list('procedures').then(procedures => this.setState({procedures: procedures.docs}))
         if (this.props.params.id) {
             data.get('pets', this.props.params.id).then(pet => {
                 this.setState({pet})
@@ -50,6 +56,19 @@ const PetsForm = React.createClass({
             }).catch(err => console.log(err))
         }
     },
+    handleSelect(e) {
+        e.preventDefault()
+        let pet = {
+            ...this.state.pet
+        }
+        let procedures = {
+            ...this.state.procedures
+        }
+        pet.procedure = procedures.filter(procedure => {
+            return procedure.id === parseInt(e.target.value, 10)
+        })
+        this.setState({procedures})
+    },
     render() {
         const formState = this.state.pet._id
             ? 'Edit'
@@ -65,10 +84,18 @@ const PetsForm = React.createClass({
                     <TextField label="Pet Name" value={this.state.pet.petName} onChange={this.handleChange('petName')}/>
                     <TextField label="Owner Last Name" value={this.state.pet.ownerLastName} onChange={this.handleChange('ownerLastName')}/>
                     <TextField label="Owner First Name" value={this.state.pet.ownerFirstName} onChange={this.handleChange('ownerFirstName')} type="text"/>
-                    <TextField label="Pet Date of Birth" value={this.state.pet.petDOB} onChange={this.handleChange('petDOB')}/>
+                    <TextField label="Pet Date of Birth" value={this.state.pet.petDOB} onChange={this.handleChange('petDOB')} type="date"/>
                     <TextField label="Species/Breed" value={this.state.pet.petSpeciesBreed} onChange={this.handleChange('petSpeciesBreed')}/>
+                    <TextField label="Special Markings" value={this.state.pet.petMarkings} onChange={this.handleChange('petMarkings')}/>
                     <div>
-                        <button>Submit</button>
+                        <label htmlFor="">Procedures</label>
+                        <select value={this.state.procedures._id} onChange={this.handleSelect}>
+                            <option value="-1">Select</option>
+                            {this.state.procedures.map(procedure => <option key={procedure._id} value={procedure._id}>{procedure.procedure}</option>)}
+                        </select>
+                    </div>
+                    <div>
+                        <ButtonComponent title="Save"/>
                     </div>
                     <Link to="/pets">Return</Link>
                 </form>

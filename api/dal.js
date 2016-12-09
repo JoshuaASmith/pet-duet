@@ -32,7 +32,7 @@ const dal = {
     getGlossary: getGlossary, //done
     getGlossaryItem: getGlossaryItem, //done
     updateGlossaryItem: updateGlossaryItem, //done
-    deleteGlossaryItem: deleteGlossaryItem //done
+    deleteGlossaryItem: deleteGlossaryItem, //done
 }
 
 /////////////////////////////////////////////////////

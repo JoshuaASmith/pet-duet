@@ -1,6 +1,7 @@
 const React = require('react')
 const {Link, Redirect} = require('react-router')
 const data = require('../../utils/data')()
+const ButtonComponent = require('../../components/button-save')
 //const confirm = require('react-confirm2')
 
 const ShowCategory = React.createClass({
@@ -33,9 +34,9 @@ const ShowCategory = React.createClass({
                     <h3>{this.state.category._id}</h3>
                     <h3>{this.state.category.category}</h3>
                 </div>
-                <button className="f6 fw1 link dim br2 ba ph3 pv2 mt3 mb2 db black center">
-                    <Link className="no-underline black hover-bg-moon-gray mb2" to={`/categories/${this.state.category._id}/edit`}>Edit Category</Link>
-                </button>
+                <ButtonComponent title="Edit Category">
+                    <Link to={`/categories/${this.state.category._id}/edit`}>Edit Category</Link>
+                </ButtonComponent>
                 <a href="#" onClick={this.handleRemove}>Remove Category</a>
                 <Link to="/categories">Return</Link>
             </div>

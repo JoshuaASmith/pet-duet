@@ -1,6 +1,7 @@
 const React = require('react')
 const data = require('../../utils/data')()
 const {Link} = require('react-router')
+const ButtonComponent = require('../../components/button-save')
 
 const Categories = React.createClass({
     getInitialState() {
@@ -22,7 +23,7 @@ const Categories = React.createClass({
                     {this.state.categories.map(li)}
                 </ul>
                 <Link to="/categories/new">
-                    <button>New Category</button>
+                    <ButtonComponent title="New Category"></ButtonComponent>
                 </Link>
                 <Link to="/">Home</Link>
             </div>

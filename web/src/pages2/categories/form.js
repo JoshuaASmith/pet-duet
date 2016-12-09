@@ -1,6 +1,8 @@
 const React = require('react')
 const {Link, Redirect} = require('react-router')
 const data = require('../../utils/data')()
+const TextField = require('../../components/text-field')
+const ButtonComponent = require('../../components/button-save')
 
 const CategoriesForm = React.createClass({
     getInitialState() {
@@ -49,12 +51,9 @@ const CategoriesForm = React.createClass({
                 <h1 className="f1 fw1">{formState + ' '}
                     Category</h1>
                 <form onSubmit={this.handleSubmit}>
+                    <TextField label="Category" value={this.state.category.category} onChange={this.handleChange('category')}/>
                     <div>
-                        <label>Category</label>
-                        <input value={this.state.category.category} onChange={this.handleChange('category')}/>
-                    </div>
-                    <div>
-                        <button>Save Category</button>
+                        <ButtonComponent title="Save"/>
                     </div>
                     <Link to="/categories">Return</Link>
                 </form>

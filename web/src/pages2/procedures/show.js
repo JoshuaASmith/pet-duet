@@ -1,6 +1,7 @@
 const React = require('react')
 const {Link, Redirect} = require('react-router')
 const data = require('../../utils/data')()
+const ButtonComponent = require('../../components/button-save')
 //const confirm = require('react-confirm2')
 
 const ShowProcedure = React.createClass({
@@ -33,9 +34,9 @@ const ShowProcedure = React.createClass({
                     <h3>{this.state.procedure.procedure}</h3>
                     <h3>{this.state.procedure.datePerformed}</h3>
                 </div>
-                <button className="f6 fw1 link dim br2 ba ph3 pv2 mt3 mb2 db black center">
-                    <Link className="no-underline black hover-bg-moon-gray mb2" to={`/procedures/${this.state.procedure._id}/edit`}>Edit Procedure Record</Link>
-                </button>
+                <ButtonComponent title="Edit Procedure Record">
+                    <Link to={`/procedures/${this.state.procedure._id}/edit`}></Link>
+                </ButtonComponent>
                 <a href="#" onClick={this.handleRemove}>Remove Procedure</a>
                 <Link to="/procedures">Return</Link>
             </div>

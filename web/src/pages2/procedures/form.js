@@ -1,12 +1,14 @@
 // category dropdown
 //name
 //date
+//associated pet
 //this is a record/history of a procdure
 
 const React = require('react')
 const {Link, Redirect} = require('react-router')
 const data = require('../../utils/data')()
 const TextField = require('../../components/text-field')
+const ButtonComponent = require('../../components/button-save')
 
 const ProceduresForm = React.createClass({
     getInitialState() {
@@ -14,12 +16,17 @@ const ProceduresForm = React.createClass({
             procedure: {
                 procedure: '',
                 typeofProcedure: '',
-                datePerformed: ''
+                datePerformed: '',
+                category: {
+                    _id: -1
+                }
             },
+            categories: [],
             resolved: false
         }
     },
     componentDidMount() {
+        data.list('categories').then(categories => this.setState({categories: categories.docs}))
         if (this.props.params.id) {
             data.get('procedures', this.props.params.id).then(procedure => {
                 this.setState({procedure})
@@ -47,6 +54,16 @@ const ProceduresForm = React.createClass({
             }).catch(err => console.log(err))
         }
     },
+    handleSelect(e) {
+        const procedure = {
+            ...this.state.procedure
+        }
+        const categories = [...this.state.categories]
+        procedure.category = categories.filter(category => {
+            return category.id === parseInt(e.target.value, 10)
+        })
+        this.setState({categories})
+    },
     render() {
         const formState = this.state.procedure._id
             ? 'Edit'
@@ -62,12 +79,20 @@ const ProceduresForm = React.createClass({
                     <TextField label="Procedure" value={this.state.procedure.procedure} onChange={this.handleChange('procedure')}/>
                     <TextField label="Type of Procedure" value={this.state.procedure.typeofProcedure} onChange={this.handleChange('typeofProcedure')}/>
                     <TextField label="Date of Procedure" value={this.state.procedure.datePerformed} onChange={this.handleChange('datePerformed')} type="date"/>
+                    <TextField label="Pet" value={this.state.procedure.petName} onChange={this.handleChange('petName')}/>
                     <div>
-                        <button>Submit</button>
+                        <label>Category</label>
+                        <select value={this.state.categories._id} onChange={this.handleSelect}>
+                            <option value="-1">Select</option>
+                            {this.state.categories.map(category => <option key={category._id} value={category._id}>{category.category}</option>)}
+                        </select>
                     </div>
-                    <Link to="/procedures">Return</Link>
-                </form>
+                    <div>
+                        <ButtonComponent title="Save"/>
+                    </div>
 
+                </form>
+                <Link to="/procedures">Return</Link>
             </div>
         )
     }

@@ -2,15 +2,17 @@ const React = require('react')
 const {Link, Redirect} = require('react-router')
 const data = require('../../utils/data')()
 //const confirm = require('react-confirm2')
+const ButtonComponent = require('../../components/button-save')
 
 const ShowPet = React.createClass({
     getInitialState() {
-        return {pet: '', resolved: false}
+        return {pet: {}, resolved: false}
     },
     componentDidMount() {
         data.get('pets', this.props.params.id).then(pet => {
             this.setState({pet})
         })
+        data.list('procedures').then(procedures => procedures.parent_id === this.state.pet.id).then(procedures => this.setState({procedures}))
     },
     handleRemove(e) {
         e.preventDefault()
@@ -22,6 +24,9 @@ const ShowPet = React.createClass({
         }
     },
     render() {
+        const record = procedure => <tr key={procedure._id}>
+            <td>{procedure.procedure}</td>
+        </tr>
         return (
             <div>
                 {this.state.resolved
@@ -32,12 +37,27 @@ const ShowPet = React.createClass({
                 <div className="tc">
                     <h3>{this.state.pet._id}</h3>
                     <h3>{this.state.pet.petName}</h3>
+
                 </div>
-                <button className="f6 fw1 link dim br2 ba ph3 pv2 mt3 mb2 db black center">
-                    <Link className="no-underline black hover-bg-moon-gray mb2" to={`/pets/${this.state.pet._id}/edit`}>Edit Pet Record</Link>
-                </button>
-                <a href="#" onClick={this.handleRemove}>Remove Pet</a>
-                <Link to="/pets">Return</Link>
+                <div>
+                    {/* <tbody>
+                        {this.state.procedures.map(record)}
+                    </tbody> */}
+                </div>
+                <div className="">
+                    <ButtonComponent title="Edit Pet Record">
+                        <Link to={`/pets/${this.state.pet._id}/edit`}></Link>
+                    </ButtonComponent>
+                    <ButtonComponent title=" New  Procedure ">
+                        <Link to="/procedures/new"></Link>
+                    </ButtonComponent>
+                    <ButtonComponent title="Remove Pet">
+                        <a href="#" onClick={this.handleRemove}>Remove Pet</a>
+                    </ButtonComponent>
+                    <ButtonComponent title="Return">
+                        <Link to="/pets">Return</Link>
+                    </ButtonComponent>
+                </div>
             </div>
         )
     }
