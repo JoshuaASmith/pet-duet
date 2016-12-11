@@ -4,6 +4,7 @@ const React = require('react')
 const data = require('../../utils/data')()
 const {Link} = require('react-router')
 const ButtonComponent = require('../../components/button-save')
+const PageTitle = require('../../components/page-title')
 
 const Procedures = React.createClass({
     getInitialState() {
@@ -15,20 +16,20 @@ const Procedures = React.createClass({
         })
     },
     render() {
-        const li = procedure => <li key={procedure._id}>
+        const li = procedure => <li className="list" key={procedure._id}>
             <Link to={`/procedures/${procedure._id}/show`}>{procedure.procedure}</Link>
         </li>
         return (
-            <div>
-                <h1>Procedures</h1>
-                <ul>
+            <div className="tc w-50 center mt4">
+                <PageTitle title="Procedures"/>
+                <ul className="list mr5 avenir f2">
                     {this.state.procedures.map(li)}
                 </ul>
                 <Link to="/procedures/new">
                     <ButtonComponent title="New Procedures"/>
                 </Link>
                 <Link to="/">
-                    <ButtonComponent title="New Home"/>
+                    <ButtonComponent title="Home"/>
                 </Link>
             </div>
         )

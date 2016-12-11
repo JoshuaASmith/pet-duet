@@ -22,7 +22,8 @@ const ProceduresForm = React.createClass({
                 }
             },
             categories: [],
-            resolved: false
+            resolved: false,
+            parent_id: this.props.location.query.pet_id
         }
     },
     componentDidMount() {
