@@ -2,7 +2,7 @@ const React = require('react')
 const {Link, Redirect} = require('react-router')
 const data = require('../../utils/data')()
 const ButtonComponent = require('../../components/button-save')
-//const confirm = require('react-confirm2')
+const Footer = require('../../components/footer')
 
 const ShowCategory = React.createClass({
     getInitialState() {
@@ -37,6 +37,7 @@ const ShowCategory = React.createClass({
                 <Link to={`/categories/${this.state.category._id}/edit`}><ButtonComponent title="Edit Category"/></Link>
                 <a href="#" onClick={this.handleRemove}>Remove Category</a>
                 <Link to="/categories"><ButtonComponent title="Return"/></Link>
+                <Footer/>
             </div>
         )
     }

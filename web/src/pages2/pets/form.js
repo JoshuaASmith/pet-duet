@@ -3,8 +3,7 @@ const {Link, Redirect} = require('react-router')
 const data = require('../../utils/data')()
 const TextField = require('../../components/text-field')
 const ButtonComponent = require('../../components/button-save')
-
-console.log(process.env.REACT_APP_API)
+const Footer = require('../../components/footer')
 
 const PetsForm = React.createClass({
     getInitialState() {
@@ -19,6 +18,7 @@ const PetsForm = React.createClass({
                 petGender: '',
                 petBreeder: '',
                 petDateAcquired: '',
+                file: '',
                 procedure: {
                     id: -1
                 }
@@ -69,6 +69,19 @@ const PetsForm = React.createClass({
         })
         this.setState({procedures})
     },
+    handleUpload(e) {
+        let pet = {
+            ...this.state.pet
+        }
+        const reader = new window.FileReader()
+        reader.addEventListener('load', () => {
+            pet.file = reader.result
+            this.setState({pet})
+        }, false)
+        if (e.target.files[0]) {
+            reader.readAsDataURL(e.target.files[0])
+        }
+    },
     render() {
         const formState = this.state.pet._id
             ? 'Edit'
@@ -95,11 +108,20 @@ const PetsForm = React.createClass({
                         </select>
                     </div>
                     <div>
+                        <label>Pet Image</label>
+                        <input type="file" onChange={this.handleUpload}/>
+                        <div>
+                            <img src={this.state.pet.file} style={{
+                                height: '200px'
+                            }} role="presentation"/>
+                        </div>
+                    </div>
+                    <div>
                         <ButtonComponent title="Save"/>
                     </div>
                     <Link to="/pets"><ButtonComponent title="Return"/></Link>
                 </form>
-
+                <Footer/>
             </div>
         )
     }

@@ -3,6 +3,7 @@ const {Link} = require('react-router')
 const data = require('../../utils/data')()
 const ButtonComponent = require('../../components/button-save')
 const PageTitle = require('../../components/page-title')
+const Footer = require('../../components/footer')
 const {filter} = require('ramda')
 const {InlineForm} = require('rebass')
 
@@ -24,21 +25,25 @@ const Pets = React.createClass({
         const li = pet => <li key={pet._id}>
             <Link to={`/pets/${pet._id}/show`}>{pet.petName + ' ' + pet.ownerLastName}</Link>
         </li>
+        const funli = pet => <li key={pet._id} className="flex items-center lh-copy pa3 ph0-l bb b--black-50">
+            <img className="w2 h2 w3-ns h3-ns br-100" src={pet.file} role="presentation"/>
+            <div className="pl3 flex-auto tc center">
+                <Link className="link dark-blue" to={`/pets/${pet._id}/show`}>{pet.petName + ' ' + pet.ownerLastName}</Link>
+            </div>
+        </li>
         return (
             <div>
                 <div className="w-50 center tc mt4">
                     <PageTitle title="Search Pet Database"/>
                     <InlineForm buttonLabel="Search" label="InlineForm" name="inline_form" onChange={this.filter}/>
                     <ul className="list mr5 avenir f2">
-                        {this.state.filtered.map(li)}
+                        {this.state.filtered.map(funli)}
                     </ul>
                 </div>
                 <Link to="/pets/new">
                     <ButtonComponent title="New Pet"/>
                 </Link>
-                <Link to="/">
-                    <ButtonComponent title="Home"/>
-                </Link>
+                <Footer/>
             </div>
         )
     }

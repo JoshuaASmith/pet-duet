@@ -118,7 +118,7 @@ function deletePet(pet, callback) {
 
 function createProcedure(procedure, callback) {
     procedure.type = 'procedure'
-    procedure._id = "procedure_" + procedure.procedure
+    procedure._id = "procedure_" + procedure.procedure + new Date().toISOString()
     db.post(procedure, function(err, result) {
         if (err)
             return callback(err)

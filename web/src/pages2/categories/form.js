@@ -3,6 +3,7 @@ const {Link, Redirect} = require('react-router')
 const data = require('../../utils/data')()
 const TextField = require('../../components/text-field')
 const ButtonComponent = require('../../components/button-save')
+const Footer = require('../../components/footer')
 
 const CategoriesForm = React.createClass({
     getInitialState() {
@@ -57,7 +58,7 @@ const CategoriesForm = React.createClass({
                     </div>
                     <Link to="/categories"><ButtonComponent title="Return"/></Link>
                 </form>
-
+                <Footer/>
             </div>
         )
     }

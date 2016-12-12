@@ -2,6 +2,7 @@ const React = require('react')
 const data = require('../../utils/data')()
 const {Link} = require('react-router')
 const ButtonComponent = require('../../components/button-save')
+const Footer = require('../../components/footer')
 
 const Categories = React.createClass({
     getInitialState() {
@@ -25,7 +26,7 @@ const Categories = React.createClass({
                 <Link to="/categories/new">
                     <ButtonComponent title="New Category"></ButtonComponent>
                 </Link>
-                <Link to="/"><ButtonComponent title="Home"/></Link>
+                <Footer/>
             </div>
         )
     }

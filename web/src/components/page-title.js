@@ -4,7 +4,7 @@ const PageTitle = React.createClass({
     render() {
         return (
             <div>
-                <h2 className="avenir fw1 fw1-l" style={{
+                <h2 className="avenir fw1 fw1-l tc" style={{
                     boxSizing: 'border-box',
                     fontSize: 50,
                     fontWeight: 600,

@@ -9,6 +9,7 @@ const {Link, Redirect} = require('react-router')
 const data = require('../../utils/data')()
 const TextField = require('../../components/text-field')
 const ButtonComponent = require('../../components/button-save')
+const Footer = require('../../components/footer')
 
 const ProceduresForm = React.createClass({
     getInitialState() {
@@ -23,7 +24,7 @@ const ProceduresForm = React.createClass({
             },
             categories: [],
             resolved: false,
-            parent_id: this.props.location.query.pet_id
+            //parent_id: this.props.location.query.pet_id
         }
     },
     componentDidMount() {
@@ -93,6 +94,7 @@ const ProceduresForm = React.createClass({
 
                 </form>
                 <Link to="/procedures">Return</Link>
+                <Footer/>
             </div>
         )
     }

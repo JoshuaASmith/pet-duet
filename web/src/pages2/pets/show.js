@@ -5,6 +5,8 @@ const data = require('../../utils/data')()
 const ButtonComponent = require('../../components/button-save')
 const Procedures = require('../procedures')
 const PetCard = require('./card')
+const Footer = require('../../components/footer')
+const PageTitle = require('../../components/page-title')
 
 const ShowPet = React.createClass({
     getInitialState() {
@@ -14,7 +16,7 @@ const ShowPet = React.createClass({
         data.get('pets', this.props.params.id).then(pet => {
             this.setState({pet})
         })
-        data.list('procedures').then(procedures => procedures.filter(procedure => procedure.parent_id === this.state.pet.id)).then(procedures => this.setState({procedures}))
+        data.list('procedures').then(procedures => procedures.filter(procedure => procedure.parent_id === this.state.pet._id)).then(procedures => this.setState({procedures}))
     },
     handleRemove(e) {
         e.preventDefault()
@@ -26,15 +28,12 @@ const ShowPet = React.createClass({
         }
     },
     render() {
-        const record = procedure => <tr key={procedure._id}>
-            <td>{procedure.procedure}</td>
-        </tr>
         return (
             <div>
                 {this.state.resolved
                     ? <Redirect to="/pets"/>
                     : null}
-                <h3 className="fw1 f2 tc">Pet</h3>
+                <PageTitle title={this.state.pet.petName + ' ' + this.state.pet.ownerLastName}/>
                 <hr className="w-50 tl b--dark-blue"/>
                 <PetCard pet={this.state.pet}/>
                 <div>
@@ -46,7 +45,7 @@ const ShowPet = React.createClass({
                     <Link to={`/pets/${this.state.pet._id}/edit`}><ButtonComponent title="Edit Pet Record"/></Link>
                     <Link to="/procedures/new"><ButtonComponent title="New Procedure"/></Link>
                     <a href="#" onClick={this.handleRemove}><ButtonComponent title="Remove Pet"/></a>
-                    <Link to="/pets"><ButtonComponent title="Return"/></Link>
+                    <Footer/>
                 </div>
             </div>
         )

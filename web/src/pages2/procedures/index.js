@@ -5,13 +5,14 @@ const data = require('../../utils/data')()
 const {Link} = require('react-router')
 const ButtonComponent = require('../../components/button-save')
 const PageTitle = require('../../components/page-title')
+const {filter, propEq} = require('ramda')
 
 const Procedures = React.createClass({
     getInitialState() {
         return {procedures: []}
     },
     componentDidMount() {
-        data.list('procedures').then(obj => {
+        data.list('procedures').then(filter(propEq('parent_id', this.props.petID))).then(obj => {
             this.setState({procedures: obj.docs})
         })
     },
@@ -27,9 +28,6 @@ const Procedures = React.createClass({
                 </ul>
                 <Link to="/procedures/new">
                     <ButtonComponent title="New Procedures"/>
-                </Link>
-                <Link to="/">
-                    <ButtonComponent title="Home"/>
                 </Link>
             </div>
         )
