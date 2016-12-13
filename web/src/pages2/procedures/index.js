@@ -12,23 +12,37 @@ const Procedures = React.createClass({
         return {procedures: []}
     },
     componentDidMount() {
-        data.list('procedures').then(filter(propEq('parent_id', this.props.petID))).then(obj => {
-            this.setState({procedures: obj.docs})
+        data.list('procedures').then(procedures => {
+            console.log('test', procedures)
+            return procedures
+        }).then(procedures => procedures = procedures.docs).then(filter(propEq('parent_id', this.props.petID))).then(procedures => {
+            this.setState({procedures: procedures})
         })
     },
     render() {
-        const li = procedure => <li className="list" key={procedure._id}>
-            <Link to={`/procedures/${procedure._id}/show`}>{procedure.procedure}</Link>
+        const li = procedure => <li key={procedure._id} className="ph3 pv2 bb b--light-silver tc avenir black hover-light-red">
+            <Link className="link black grow" to={`/procedures/${procedure._id}/show?parent_id=${this.props.petID}`}>{procedure.procedure}
+                , {procedure.datePerformed}</Link>
         </li>
         return (
-            <div className="tc w-50 center mt4">
-                <PageTitle title="Procedures"/>
-                <ul className="list mr5 avenir f2">
-                    {this.state.procedures.map(li)}
-                </ul>
-                <Link to="/procedures/new">
-                    <ButtonComponent title="New Procedures"/>
-                </Link>
+            <div>
+                <div className="tc w-50 center mt4">
+                    <PageTitle title="Procedures"/>
+                </div>
+                <div>
+                    <div>
+                        <ul className="list pl0 ml0 center mw6 ba b--light-silver br3 bg-light-gray black">
+                            {this.state.procedures.map(li)}
+                        </ul>
+                    </div>
+                    <div className="center tc">
+                        <Link className="link no underline" to="/procedures/new">
+                            <button className="f6 fw1 dim br2 ba ph3 pv2 mt3 mb2 tc center">
+                                New Procedure
+                            </button>
+                        </Link>
+                    </div>
+                </div>
             </div>
         )
     }

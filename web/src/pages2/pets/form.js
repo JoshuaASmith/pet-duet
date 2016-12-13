@@ -87,27 +87,33 @@ const PetsForm = React.createClass({
             ? 'Edit'
             : 'New'
         return (
-            <div className="pa2">
+            <div className="">
                 {this.state.resolved
                     ? <Redirect to="/pets"/>
                     : null}
-                <h1 className="f1 fw1">{formState + ' '}
-                    Pet</h1>
+                <h2 className="avenir fw1 fw1-l tc" style={{
+                    boxSizing: 'border-box',
+                    fontSize: 50,
+                    fontWeight: 600,
+                    textTransform: 'uppercase',
+                    letterSpacing: '0.1em',
+                    fontFamily: '"Avenir Next", sans-serif'
+                }}>{formState + ' '}
+                    Pet</h2>
                 <form onSubmit={this.handleSubmit}>
                     <TextField label="Pet Name" value={this.state.pet.petName} onChange={this.handleChange('petName')}/>
                     <TextField label="Owner Last Name" value={this.state.pet.ownerLastName} onChange={this.handleChange('ownerLastName')}/>
                     <TextField label="Owner First Name" value={this.state.pet.ownerFirstName} onChange={this.handleChange('ownerFirstName')} type="text"/>
                     <TextField label="Pet Date of Birth" value={this.state.pet.petDOB} onChange={this.handleChange('petDOB')} type="date"/>
                     <TextField label="Species/Breed" value={this.state.pet.petSpeciesBreed} onChange={this.handleChange('petSpeciesBreed')}/>
-                    <TextField label="Special Markings" value={this.state.pet.petMarkings} onChange={this.handleChange('petMarkings')}/>
-                    <div>
+                    <TextField label="Special Markings" value={this.state.pet.petMarkings} onChange={this.handleChange('petMarkings')}/> {/* <div className="tc center pa3">
                         <label htmlFor="">Procedures</label>
                         <select value={this.state.procedures._id} onChange={this.handleSelect}>
                             <option value="-1">Select</option>
                             {this.state.procedures.map(procedure => <option key={procedure._id} value={procedure._id}>{procedure.procedure}</option>)}
                         </select>
-                    </div>
-                    <div>
+                    </div> */}
+                    <div className="tc center pa3">
                         <label>Pet Image</label>
                         <input type="file" onChange={this.handleUpload}/>
                         <div>
@@ -119,7 +125,9 @@ const PetsForm = React.createClass({
                     <div>
                         <ButtonComponent title="Save"/>
                     </div>
-                    <Link to="/pets"><ButtonComponent title="Return"/></Link>
+                    <div className="mb3">
+                        <Link to="/pets"><ButtonComponent title="Return"/></Link>
+                    </div>
                 </form>
                 <Footer/>
             </div>

@@ -10,13 +10,21 @@ const PageTitle = require('../../components/page-title')
 
 const ShowPet = React.createClass({
     getInitialState() {
-        return {pet: {}, resolved: false, procedures: []}
+        return {
+            pet: {
+                petName: '',
+                ownerLastName: '',
+                _id: ''
+            },
+            resolved: false,
+            procedures: []
+        }
     },
     componentDidMount() {
         data.get('pets', this.props.params.id).then(pet => {
             this.setState({pet})
         })
-        data.list('procedures').then(procedures => procedures.filter(procedure => procedure.parent_id === this.state.pet._id)).then(procedures => this.setState({procedures}))
+        data.list('procedures').then(procedures => console.log(procedures)).then(procedures => procedures.docs.filter(procedure => procedure.parent_id === this.state.pet._id)).then(procedures => this.setState({procedures: procedures}))
     },
     handleRemove(e) {
         e.preventDefault()
@@ -24,7 +32,6 @@ const ShowPet = React.createClass({
             data.remove('pets', this.props.params.id, this.state.pet).then(res => {
                 this.setState({resolved: true})
             })
-
         }
     },
     render() {
@@ -36,6 +43,7 @@ const ShowPet = React.createClass({
                 <PageTitle title={this.state.pet.petName + ' ' + this.state.pet.ownerLastName}/>
                 <hr className="w-50 tl b--dark-blue"/>
                 <PetCard pet={this.state.pet}/>
+                <hr className="w-50 tl b--dark-blue"/>
                 <div>
                     {this.state.pet._id
                         ? <Procedures petID={this.state.pet._id}/>
@@ -44,7 +52,7 @@ const ShowPet = React.createClass({
                 <div className="">
                     <Link to={`/pets/${this.state.pet._id}/edit`}><ButtonComponent title="Edit Pet Record"/></Link>
                     <Link to="/procedures/new"><ButtonComponent title="New Procedure"/></Link>
-                    <a href="#" onClick={this.handleRemove}><ButtonComponent title="Remove Pet"/></a>
+                    <a href="#" onClick={this.handleRemove}><ButtonComponent className="ph4" title="Remove Pet"/></a>
                     <Footer/>
                 </div>
             </div>

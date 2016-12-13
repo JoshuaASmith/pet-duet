@@ -2,6 +2,8 @@ const React = require('react')
 const {Link, Redirect} = require('react-router')
 const data = require('../../utils/data')()
 const ButtonComponent = require('../../components/button-save')
+const PageTitle = require('../../components/page-title')
+const Footer = require('../../components/footer')
 //const confirm = require('react-confirm2')
 
 const ShowProcedure = React.createClass({
@@ -27,16 +29,29 @@ const ShowProcedure = React.createClass({
                 {this.state.resolved
                     ? <Redirect to="/procedures"/>
                     : null}
-                <h3 className="fw1 f2 tc">Procedure</h3>
+                <PageTitle title="Procedure"/>
                 <hr className="w-50 tl b--dark-blue"/>
-                <div className="tc">
-                    <h3>{this.state.procedure._id}</h3>
-                    <h3>{this.state.procedure.procedure}</h3>
-                    <h3>{this.state.procedure.datePerformed}</h3>
+                <div>
+                    <div className="tc avenir">
+                        <dl className="lh-title pa4 mt0">
+                            <dt className="f5 b mt2">Procedure</dt>
+                            <dd className="ml0">{this.state.procedure.procedure}</dd>
+                            <hr className="w-10"/>
+                            <dt className="f5 b mt2">Date Performed</dt>
+                            <dd className="ml0">{this.state.procedure.datePerformed}</dd>
+                            <hr className="w-10"/>
+                            <dt className="f5 b mt2">Procedure Category</dt>
+                            <dd className="ml0">{this.state.procedure.category}</dd>
+                        </dl>
+                    </div>
                 </div>
-                <Link to={`/procedures/${this.state.procedure._id}/edit`}><ButtonComponent title="Edit Procedure Record"/></Link>
-                <a href="#" onClick={this.handleRemove}>Remove Procedure</a>
-                <Link to="/procedures">Return</Link>
+                <hr className="w-50 tl b--dark-blue"/>
+                <div className="mb4">
+                    <Link to={`/procedures/${this.state.procedure._id}/edit`}><ButtonComponent title="Edit Procedure Record"/></Link>
+                    <a href="#" onClick={this.handleRemove}><ButtonComponent title="Remove Procedure"/></a>
+                    <Link to="/procedures"><ButtonComponent title="Return"/></Link>
+                </div>
+                <Footer/>
             </div>
         )
     }

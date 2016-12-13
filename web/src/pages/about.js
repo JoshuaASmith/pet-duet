@@ -1,6 +1,7 @@
 const React = require('react')
 const PageTitle = require('../components/page-title')
 const Footer = require('../components/footer')
+const QuoteCarousel = require('../components/carousel')
 
 const About = React.createClass({
     render() {
@@ -22,7 +23,7 @@ const About = React.createClass({
                             <header className="bb b--black-70">
                                 <h3 className="f2 fw7 ttu tracked lh-title mt0 mb3 avenir pv4 tc">Pet Duet</h3>
                                 <h4 className="f3 fw4 i lh-title mt0 tc">Join in harmony with your vet
-                                    <br></br>over your pet's health today.</h4>
+                                    <br></br>over your pet's health.</h4>
                             </header>
                             <section className="pt5 pb4">
                                 <p className="times lh-copy measure f4 mt0">
@@ -32,18 +33,11 @@ const About = React.createClass({
                         </div>
                     </div>
                 </article>
-                <article className="vh-25 dt w-100 bg-dark-gray">
-                    <div className="dtc v-mid tc white ph3 ph4-l tc center">
-                        <blockquote className="pv4 helvetica mt2 white ">
-                            <p className="f5 f5-m f3-l measure mt0 center tc">
-                                your quote goes here
-                            </p>
-                            <cite className="f6 ttu tracked fs-normal">―Stanley Morison</cite>
-                        </blockquote>
-                    </div>
-                </article>
+                <div>
+                    <QuoteCarousel/>
+                </div>
                 <section className="mw7 center avenir mv4">
-                    <article class="bt bb b--black-10">
+                    <article className="mt4">
                         <div className="flex flex-column flex-row-ns">
                             <div className="pr3-ns mb4 mb0-ns w-100 w-40-ns">
                                 <img src="https://i.imgsafe.org/ec90a635b1.jpg" className="db" role="presentation"/>

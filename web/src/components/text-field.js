@@ -4,7 +4,7 @@ const {Input} = require('rebass')
 const TextField = React.createClass({
     render() {
         return (
-            <div className="w-50">
+            <div className="w-third tc center">
                 <Input label={this.props.label} type={this.props.type} value={this.props.value} onChange={this.props.onChange} placeholder={this.props.label} name=""/>
             </div>
         )
