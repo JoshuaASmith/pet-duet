@@ -33,13 +33,6 @@ const Procedures = React.createClass({
                             {this.state.procedures.map(li)}
                         </ul>
                     </div>
-                    <div className="center tc">
-                        <Link className="link no underline" to="/procedures/new">
-                            <button className="f6 fw1 dim br2 ba ph3 pv2 mt3 mb2 tc center">
-                                New Procedure
-                            </button>
-                        </Link>
-                    </div>
                 </div>
             </div>
         )

@@ -24,7 +24,7 @@ const ShowPet = React.createClass({
         data.get('pets', this.props.params.id).then(pet => {
             this.setState({pet})
         })
-        data.list('procedures').then(procedures => console.log(procedures)).then(procedures => procedures.docs.filter(procedure => procedure.parent_id === this.state.pet._id)).then(procedures => this.setState({procedures: procedures}))
+        data.list('procedures').then(procedures => console.log(procedures)).then(procedures => procedures.filter(procedure => procedure.parent_id === this.state.pet._id)).then(procedures => this.setState({procedures: procedures}))
     },
     handleRemove(e) {
         e.preventDefault()
@@ -50,6 +50,13 @@ const ShowPet = React.createClass({
                         : null}
                 </div>
                 <div className="mb3">
+                    <div className="center tc">
+                        <Link className="link no underline" to={`/procedures/new?pet_id=${this.state.pet._id}&name=${this.state.pet.petName}`}>
+                            <button className="f6 fw1 dim br2 ba ph3 pv2 mt3 mb2 tc center">
+                                New Procedure
+                            </button>
+                        </Link>
+                    </div>
                     <Link to={`/pets/${this.state.pet._id}/edit`}><ButtonComponent title="Edit Pet Record"/></Link>
                     <a className="" href="#" onClick={this.handleRemove}><ButtonComponent className="ph4" title="Remove Pet"/></a>
                 </div>

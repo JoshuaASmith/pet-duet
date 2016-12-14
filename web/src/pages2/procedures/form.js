@@ -14,20 +14,23 @@ const ProceduresForm = React.createClass({
                 datePerformed: '',
                 comments: '',
                 category: {
-                    _id: -1
+                    id: -1
                 },
                 pet: {},
-                parent_id: ''
+                parent_id: this.props.location.query.pet_id
+                    ? this.props.location.query.pet_id
+                    : this.props.params
             },
             categories: [],
             pets: [],
             resolved: false,
-            //parent_id: this.props.location.query.pet_id
+            colors: []
         }
     },
     componentDidMount() {
         data.list('categories').then(categories => this.setState({categories: categories.docs}))
-        data.list('pets').then(pets => this.setState({pets: pets.docs}))
+        // data.list('pets').then(pets => console.log('pets.docs', pets.docs)).then(pets => this.setState({pets: pets.docs}))
+        data.get('pets', this.props.location.query.pet_id).then(res => this.setState({pet: res}))
         if (this.props.params.id) {
             data.get('procedures', this.props.params.id).then(procedure => {
                 console.log(procedure)
@@ -63,8 +66,12 @@ const ProceduresForm = React.createClass({
             ...this.state.procedure
         }
         const categories = [...this.state.categories]
-        procedure.category = categories.filter(category => {
-            return category.id === parseInt(e.target.value, 10)
+        // procedure.category = categories.filter(category => {
+        //     return category.id === parseInt(e.target.value, 10)
+        // })
+        procedure.category = categories.find(category => {
+            console.log('test2', category._id === e.target.value)
+            return category._id === e.target.value
         })
         this.setState({procedure})
     },
@@ -99,20 +106,21 @@ const ProceduresForm = React.createClass({
                 <form onSubmit={this.handleSubmit}>
                     <TextField label="Procedure" value={this.state.procedure.procedure} onChange={this.handleChange('procedure')}/>
                     <TextField label="Date of Procedure" value={this.state.procedure.datePerformed} onChange={this.handleChange('datePerformed')} type="date"/>
+                    <TextField label="Pet" value={this.state.procedure.parent_id} onChange={this.handleChange('parent_id')}/>
                     <div className="tc center">
                         <label className="f6 b db mb2">Comments</label>
                         <input value={this.state.procedure.comments} onChange={this.handleChange('comments')} className="db border-box hover-black w-100 measure ba b--black-20 pa2 br2 mb2 center" type="text"/>
                     </div>
-                    <div className="ph3 pv4 db">
+                    {/* <div className="ph3 pv4 db">
                         <label className="db">Pet</label>
                         <select value={this.state.procedure.parent_id} onChange={this.handlePetSelect}>
                             <option value="-1">Select</option>
                             {this.state.pets.map(pet => <option key={pet._id} value={pet._id}>{pet._id}</option>)}
                         </select>
-                    </div>
+                    </div> */}
                     <div className="pa3 db">
                         <label className="db">Procedure Category</label>
-                        <select value={this.state.procedure.category} onChange={this.handleSelect}>
+                        <select value={this.state.procedure.category.id} onChange={this.handleSelect}>
                             <option value="-1">Select</option>
                             {this.state.categories.map(category => <option key={category._id} value={category._id}>{category.category}</option>)}
                         </select>

@@ -47,7 +47,7 @@ const ShowProcedure = React.createClass({
                             <hr className="w-10"/>
                             <dt className="f5 b mt2">Procedure Category</dt>
                             <dd className="ml0">{path([
-                                    'state', 'procedure', 'category', 'name'
+                                    'state', 'procedure', 'category', 'category'
                                 ], this)}</dd>
                             <hr className="w-10"/>
                             <dt className="f5 b mt2">Pet ID</dt>
@@ -57,7 +57,7 @@ const ShowProcedure = React.createClass({
                 </div>
                 <hr className="w-50 tl b--dark-blue"/>
                 <div className="mb4">
-                    <Link to={`/procedures/${this.state.procedure._id}/edit`}><ButtonComponent title="Edit Procedure Record"/></Link>
+                    <Link to={`/procedures/${this.state.procedure._id}/edit?parent_id=${this.state.procedure.parent_id}`}><ButtonComponent title="Edit Procedure Record"/></Link>
                     <a href="#" onClick={this.handleRemove}><ButtonComponent title="Remove Procedure"/></a>
                     <Link to="/procedures"><ButtonComponent title="Return"/></Link>
                 </div>
