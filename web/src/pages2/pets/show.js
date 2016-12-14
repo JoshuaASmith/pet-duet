@@ -49,10 +49,11 @@ const ShowPet = React.createClass({
                         ? <Procedures petID={this.state.pet._id}/>
                         : null}
                 </div>
-                <div className="">
+                <div className="mb3">
                     <Link to={`/pets/${this.state.pet._id}/edit`}><ButtonComponent title="Edit Pet Record"/></Link>
-                    <Link to="/procedures/new"><ButtonComponent title="New Procedure"/></Link>
-                    <a href="#" onClick={this.handleRemove}><ButtonComponent className="ph4" title="Remove Pet"/></a>
+                    <a className="" href="#" onClick={this.handleRemove}><ButtonComponent className="ph4" title="Remove Pet"/></a>
+                </div>
+                <div>
                     <Footer/>
                 </div>
             </div>

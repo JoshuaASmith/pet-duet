@@ -1,5 +1,3 @@
-//index of procedures will be embedded in show of specific pets
-//link to add new procedure that adds to pet
 const React = require('react')
 const data = require('../../utils/data')()
 const {Link} = require('react-router')
@@ -28,7 +26,8 @@ const Procedures = React.createClass({
                 <div className="tc w-50 center mt4">
                     <PageTitle title="Procedures"/>
                 </div>
-                <div>
+                <hr className="w-50 tl b--dark-blue"/>
+                <div className="pt2">
                     <div>
                         <ul className="list pl0 ml0 center mw6 ba b--light-silver br3 bg-light-gray black">
                             {this.state.procedures.map(li)}

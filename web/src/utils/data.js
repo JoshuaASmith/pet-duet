@@ -2,6 +2,7 @@ const fetch = require('isomorphic-fetch')
 const url = process.env.REACT_APP_API
 
 module.exports = function() {
+    const setAuth = () => 'Bearer ' + window.localStorage.getItem('id_token')
     const list = function(model) {
         return fetch(`${url}/${model}`).then(res => res.json())
     }
@@ -10,6 +11,7 @@ module.exports = function() {
             method: 'POST',
             body: JSON.stringify(doc),
             headers: {
+                Authorization: setAuth(),
                 'content-type': 'application/json'
             }
         }).then(res => res.json())
@@ -19,6 +21,7 @@ module.exports = function() {
             method: 'PUT',
             body: JSON.stringify(doc),
             headers: {
+                Authorization: setAuth(),
                 'content-type': 'application/json'
             }
         }).then(res => res.json())
@@ -32,6 +35,7 @@ module.exports = function() {
         method: "DELETE",
         body: JSON.stringify(doc),
         headers: {
+            Authorization: setAuth(),
             'content-type': 'application/json'
         }
     }).then(res => res.json())

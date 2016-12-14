@@ -100,6 +100,8 @@ const PetsForm = React.createClass({
                     fontFamily: '"Avenir Next", sans-serif'
                 }}>{formState + ' '}
                     Pet</h2>
+                <hr className="w-50 tl b--dark-blue"/>
+
                 <form onSubmit={this.handleSubmit}>
                     <TextField label="Pet Name" value={this.state.pet.petName} onChange={this.handleChange('petName')}/>
                     <TextField label="Owner Last Name" value={this.state.pet.ownerLastName} onChange={this.handleChange('ownerLastName')}/>
@@ -116,9 +118,10 @@ const PetsForm = React.createClass({
                     <div className="tc center pa3">
                         <label>Pet Image</label>
                         <input type="file" onChange={this.handleUpload}/>
-                        <div>
-                            <img src={this.state.pet.file} style={{
-                                height: '200px'
+                        <div className="pa3">
+                            <img className="b--black" src={this.state.pet.file} style={{
+                                height: '200px',
+                                width: '200px'
                             }} role="presentation"/>
                         </div>
                     </div>

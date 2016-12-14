@@ -35,15 +35,17 @@ const Pets = React.createClass({
                 <div className="w-50 center tc mt4">
                     <PageTitle title="Search Pet Database"/>
                     <div className="mt3">
-                        <input className="pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100 tc" type="text" name="pet-search" onChange={this.filter}/>
+                        <input className="pa2 input-reset ba b--dark-blue bg-transparent hover-bg-black hover-white w-100 tc" type="text" name="pet-search" onChange={this.filter}/>
                     </div>
                     <ul className="list mr5 avenir f2">
                         {this.state.filtered.map(funli)}
                     </ul>
                 </div>
-                <Link to="/pets/new">
-                    <ButtonComponent title="New Pet"/>
-                </Link>
+                <div className="mb4">
+                    <Link to="/pets/new">
+                        <ButtonComponent title="New Pet"/>
+                    </Link>
+                </div>
                 <Footer/>
             </div>
         )

@@ -1,9 +1,3 @@
-// category dropdown
-//name
-//date
-//associated pet
-//this is a record/history of a procdure
-
 const React = require('react')
 const {Link, Redirect} = require('react-router')
 const data = require('../../utils/data')()
@@ -36,6 +30,9 @@ const ProceduresForm = React.createClass({
         data.list('pets').then(pets => this.setState({pets: pets.docs}))
         if (this.props.params.id) {
             data.get('procedures', this.props.params.id).then(procedure => {
+                console.log(procedure)
+                return procedure
+            }).then(procedure => {
                 this.setState({procedure})
             })
         }
@@ -69,7 +66,7 @@ const ProceduresForm = React.createClass({
         procedure.category = categories.filter(category => {
             return category.id === parseInt(e.target.value, 10)
         })
-        this.setState({categories})
+        this.setState({procedure})
     },
     handlePetSelect(e) {
         const procedure = {
@@ -77,9 +74,9 @@ const ProceduresForm = React.createClass({
         }
         const pets = [...this.state.pets]
         procedure.pet = pets.filter(pet => {
-            return pet.id === parseInt(e.target.value, 10)
+            return pet._id === e.target.value
         })
-        this.setState({pets})
+        this.setState({procedure})
     },
     render() {
         const formState = this.state.procedure._id
@@ -106,16 +103,16 @@ const ProceduresForm = React.createClass({
                         <label className="f6 b db mb2">Comments</label>
                         <input value={this.state.procedure.comments} onChange={this.handleChange('comments')} className="db border-box hover-black w-100 measure ba b--black-20 pa2 br2 mb2 center" type="text"/>
                     </div>
-                    <div className="ph3 pv4">
-                        <label>Pet</label>
-                        <select value={this.state.procedure.parent_id} onChange={this.handleSelect}>
+                    <div className="ph3 pv4 db">
+                        <label className="db">Pet</label>
+                        <select value={this.state.procedure.parent_id} onChange={this.handlePetSelect}>
                             <option value="-1">Select</option>
                             {this.state.pets.map(pet => <option key={pet._id} value={pet._id}>{pet._id}</option>)}
                         </select>
                     </div>
-                    <div className="pa3">
-                        <label>Procedure Category</label>
-                        <select value={this.state.categories._id} onChange={this.handleSelect}>
+                    <div className="pa3 db">
+                        <label className="db">Procedure Category</label>
+                        <select value={this.state.procedure.category} onChange={this.handleSelect}>
                             <option value="-1">Select</option>
                             {this.state.categories.map(category => <option key={category._id} value={category._id}>{category.category}</option>)}
                         </select>

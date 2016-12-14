@@ -1,12 +1,17 @@
 const http = require('http')
 const app = require('express')()
+require('dotenv').config()
 const HTTPError = require('node-http-error')
 const port = process.env.PORT || 4000
 const cors = require('cors')
 app.use(cors({origin: true, credentials: true}))
 const bodyParser = require('body-parser')
-app.use(bodyParser.json())
+app.use(bodyParser.json({limit: '50mb'}))
+//parses the json
+app.use(bodyParser.urlencoded({limit: '50mb', extended: true}))
 const dal = require('./dal.js')
+const jwt = require('express-jwt')
+const checkJWT = jwt({secret: process.env.AUTH0_SECRET})
 
 /////////////////////////////////////////////////////
 ////////////// PETS /////////////////////////////////

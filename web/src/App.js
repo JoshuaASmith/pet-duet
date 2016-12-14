@@ -1,5 +1,5 @@
 const React = require('react')
-const {Match, BrowserRouter, Link} = require('react-router')
+const {Match, HashRouter, Link, Redirect} = require('react-router')
 const Home = require('./pages/home')
 const About = require('./pages/about')
 const Pets = require('./pages2/pets/index')
@@ -13,11 +13,12 @@ const CategoriesForm = require('./pages2/categories/form')
 const ShowCategory = require('./pages2/categories/show')
 const Glossary = require('./pages2/glossary')
 const {Space} = require('rebass')
+const auth = require('./utils/auth')(process.env.REACT_APP_ID, process.env.REACT_APP_DOMAIN)
 
 const App = React.createClass({
     render() {
         return (
-            <BrowserRouter>
+            <HashRouter>
                 <div>
                     <div className="avenir">
                         <header>
@@ -51,9 +52,16 @@ const App = React.createClass({
                     <Match pattern="/categories/:id/show" component={ShowCategory}/>
                     <Match pattern="/glossary" component={Glossary}/>
                 </div>
-            </BrowserRouter>
+            </HashRouter>
         )
     }
 })
+
+const MatchWhenAuthorized = ({
+    component: Component,
+    ...rest
+}) => <Match {...rest} render={props => auth.loggedIn()
+    ? <Component {...props}/>
+    : <Redirect to="/"/>}/>
 
 module.exports = App
