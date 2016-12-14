@@ -18,10 +18,12 @@ const ProceduresForm = React.createClass({
                 procedure: '',
                 typeofProcedure: '',
                 datePerformed: '',
+                comments: '',
                 category: {
                     _id: -1
                 },
-                pet: {}
+                pet: {},
+                parent_id: ''
             },
             categories: [],
             pets: [],
@@ -100,6 +102,10 @@ const ProceduresForm = React.createClass({
                 <form onSubmit={this.handleSubmit}>
                     <TextField label="Procedure" value={this.state.procedure.procedure} onChange={this.handleChange('procedure')}/>
                     <TextField label="Date of Procedure" value={this.state.procedure.datePerformed} onChange={this.handleChange('datePerformed')} type="date"/>
+                    <div className="tc center">
+                        <label className="f6 b db mb2">Comments</label>
+                        <input value={this.state.procedure.comments} onChange={this.handleChange('comments')} className="db border-box hover-black w-100 measure ba b--black-20 pa2 br2 mb2 center" type="text"/>
+                    </div>
                     <div className="ph3 pv4">
                         <label>Pet</label>
                         <select value={this.state.procedure.parent_id} onChange={this.handleSelect}>

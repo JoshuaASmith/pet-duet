@@ -33,7 +33,9 @@ const About = React.createClass({
                         </div>
                     </div>
                 </article>
-                <div>
+                <div style={{
+                    height: 200
+                }}>
                     <QuoteCarousel/>
                 </div>
                 <section className="mw7 center avenir mv4">

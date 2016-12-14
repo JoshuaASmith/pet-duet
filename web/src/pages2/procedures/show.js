@@ -42,6 +42,8 @@ const ShowProcedure = React.createClass({
                             <hr className="w-10"/>
                             <dt className="f5 b mt2">Procedure Category</dt>
                             <dd className="ml0">{this.state.procedure.category}</dd>
+                            <dt className="f5 b mt2">TEST FOR ID</dt>
+                            <dd classNAme="ml0">{this.state.procedure._id}</dd>
                         </dl>
                     </div>
                 </div>

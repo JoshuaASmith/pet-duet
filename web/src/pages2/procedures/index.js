@@ -3,7 +3,6 @@
 const React = require('react')
 const data = require('../../utils/data')()
 const {Link} = require('react-router')
-const ButtonComponent = require('../../components/button-save')
 const PageTitle = require('../../components/page-title')
 const {filter, propEq} = require('ramda')
 

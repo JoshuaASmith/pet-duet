@@ -5,7 +5,6 @@ const ButtonComponent = require('../../components/button-save')
 const PageTitle = require('../../components/page-title')
 const Footer = require('../../components/footer')
 const {filter} = require('ramda')
-const {InlineForm} = require('rebass')
 
 const Pets = React.createClass({
     getInitialState() {
@@ -35,7 +34,9 @@ const Pets = React.createClass({
             <div>
                 <div className="w-50 center tc mt4">
                     <PageTitle title="Search Pet Database"/>
-                    <InlineForm buttonLabel="Search" label="InlineForm" name="inline_form" onChange={this.filter}/>
+                    <div className="mt3">
+                        <input className="pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100 tc" type="text" name="pet-search" onChange={this.filter}/>
+                    </div>
                     <ul className="list mr5 avenir f2">
                         {this.state.filtered.map(funli)}
                     </ul>

@@ -5,7 +5,9 @@ const QuoteCarousel = React.createClass({
     mixins: [Carousel.ControllerMixin],
     render() {
         return (
-            <Carousel>
+            <Carousel style={{
+                height: 210
+            }}>
                 <div>
                     <article className="dt w-100 bg-dark-gray">
                         <div className="dtc tc white ph3 ph4-l tc center">
@@ -21,7 +23,7 @@ const QuoteCarousel = React.createClass({
                 <div>
                     <article className="vh-25 dt w-100 bg-dark-gray">
                         <div className="dtc v-mid tc white ph3 ph4-l tc center">
-                            <blockquote className="pv4 helvetica mt2 white ">
+                            <blockquote className="pv4 helvetica mt2 white">
                                 <p className="f5 f5-m f3-l measure mt0 center tc">
                                     "Pet Duet makes it so much easier to care for our pets! We love how simple it is."
                                 </p>
