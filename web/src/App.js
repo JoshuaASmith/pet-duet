@@ -35,8 +35,8 @@ const App = React.createClass({
                                     <Link className="link dim gray f4 f3-ns dib hover-near-black no-underline" to="/about" title="About">About</Link>
                                     <Space x={3}/>
                                     <Link className="link dim gray f4 f3-ns dib hover-near-black" to="/pets" title="Pets">Pets</Link>
-                                    <Space x={3}/>
-                                    <Link className="link dim gray f4 f3-ns dib hover-near-black" to="/procedures" title="Procedures">Procedures</Link>
+                                    {/* <Space x={3}/>
+                                    <Link className="link dim gray f4 f3-ns dib hover-near-black" to="/procedures" title="Procedures">Procedures</Link> */}
                                     <Space x={3}/>
                                     <Link className="link dim gray f4 f3-ns dib hover-near-black" to="/glossary" title="Glossary">Glossary</Link>
                                     <Space x={3}/>

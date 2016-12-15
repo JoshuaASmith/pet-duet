@@ -25,13 +25,13 @@ const About = React.createClass({
                         }}>
                             <header className="">
                                 <h3 className="f2 fw7 ttu tracked lh-title mt0 mb3 avenir pv4 tc">Pet Duet</h3>
-                                <h4 className="f3 fw4 i lh-title mt0 tc">Join in harmony with your vet
-                                    <br></br>over your pet's health.</h4>
+                                <h4 className="f3 fw4 i lh-title mt0 tc">Join in harmony with owners
+                                    <br></br>over their pet's health.</h4>
                             </header>
                             <hr className="w-80 tl b--dark-blue"/>
                             <section className="pt3 pb4">
                                 <p className="times lh-copy measure f4 mt0">
-                                    Pet Duet is designed to make communication between owner's and vets easier and more efficient. Owners can login to Pet Duet and see the status of their pet's vaccination records and information on their recent visits. Vets will have a centralized place to upload information about client's pets to make communication more seamless. Help take the stress out of caring for your pets by using Pet Duet!
+                                    Pet Duet is designed to help veterinarians make keeping track of the pets they help take care of easier and more efficient. Vets and their staff can login to Pet Duet and see information on the pets that come to their office and the procedures and vaccinations they have recently had. Vets will have a centralized place to upload information about client's pets to make record keeping more seamless. Help take the stress out of managing your office by using Pet Duet!
                                 </p>
                             </section>
                         </div>
