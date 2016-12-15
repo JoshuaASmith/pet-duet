@@ -92,7 +92,7 @@ const ProceduresForm = React.createClass({
         return (
             <div className="center tc">
                 {this.state.resolved
-                    ? <Redirect to="/procedures"/>
+                    ? <Redirect to="/pets"/>
                     : null}
                 <h2 className="avenir fw1 fw1-l tc" style={{
                     boxSizing: 'border-box',

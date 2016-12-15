@@ -3,6 +3,14 @@ const React = require('react')
 const {Banner, Heading} = require('rebass')
 
 const Home = React.createClass({
+    getInitialState() {
+        return {logout: false, nickname: ''}
+    },
+    componentDidMount() {
+        if (!this.props.auth.loggedIn() && this.props.location.hash.indexOf('access_token') === -1) {
+            this.props.auth.login()
+        }
+    },
     render() {
         return (
             <div className="bg-near-black">

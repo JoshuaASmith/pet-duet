@@ -26,8 +26,6 @@ const ShowProcedure = React.createClass({
     render() {
         return (
             <div>
-                <span>{JSON.stringify(this.state.procedure)}</span>
-
                 {this.state.resolved
                     ? <Redirect to="/procedures"/>
                     : null}
@@ -58,7 +56,7 @@ const ShowProcedure = React.createClass({
                 <hr className="w-50 tl b--dark-blue"/>
                 <div className="mb4">
                     <Link to={`/procedures/${this.state.procedure._id}/edit?parent_id=${this.state.procedure.parent_id}`}><ButtonComponent title="Edit Procedure Record"/></Link>
-                    <a href="#" onClick={this.handleRemove}><ButtonComponent title="Remove Procedure"/></a>
+                    <a onClick={this.handleRemove}><ButtonComponent title="Remove Procedure"/></a>
                     <Link to="/procedures"><ButtonComponent title="Return"/></Link>
                 </div>
                 <Footer/>

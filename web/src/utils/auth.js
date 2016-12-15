@@ -29,6 +29,7 @@ module.exports = function(clientId, domain) {
     function logout() {
         localStorage.removeItem('id_token')
         localStorage.removeItem('profile')
+        console.log('you logged out')
     }
 
     function setToken(idToken) {

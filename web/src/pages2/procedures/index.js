@@ -18,7 +18,7 @@ const Procedures = React.createClass({
     },
     render() {
         const li = procedure => <li key={procedure._id} className="ph3 pv2 bb b--light-silver tc avenir black hover-light-red">
-            <Link className="link black grow" to={`/procedures/${procedure._id}/show?parent_id=${this.props.petID}`}>{procedure.procedure}
+            <Link className="link black hover-light-red avenir grow" to={`/procedures/${procedure._id}/show?parent_id=${this.props.petID}`}>{procedure.procedure}
                 , {procedure.datePerformed}</Link>
         </li>
         return (

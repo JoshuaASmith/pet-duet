@@ -1,4 +1,5 @@
 const React = require('react')
+const {Link} = require('react-router')
 const PageTitle = require('../components/page-title')
 const Footer = require('../components/footer')
 const QuoteCarousel = require('../components/carousel')
@@ -68,7 +69,7 @@ const About = React.createClass({
                                 </div>
                             </div>
                             <div className="pa3 pa4-ns dtc-ns v-mid">
-                                <a href="http://pet-jet.surge.sh" className="no-underline f6 tc db w-100 pv3 bg-animate bg-light-silver hover-bg-dark-blue white br2 avenir">Sign Up!</a>
+                                <Link to="/" className="no-underline f6 tc db w-100 pv3 bg-animate bg-light-silver hover-bg-dark-blue white br2 avenir">Sign Up!</Link>
                             </div>
                         </div>
                     </article>

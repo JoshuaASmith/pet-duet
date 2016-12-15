@@ -16,6 +16,13 @@ const {Space} = require('rebass')
 const auth = require('./utils/auth')(process.env.REACT_APP_ID, process.env.REACT_APP_DOMAIN)
 
 const App = React.createClass({
+    // getInitialState() {
+    //     return {logout: false}
+    // },
+    logout(e) {
+        auth.logout()
+        this.setState({logout: true})
+    },
     render() {
         return (
             <HashRouter>
@@ -32,24 +39,26 @@ const App = React.createClass({
                                     <Link className="link dim gray f4 f3-ns dib hover-near-black" to="/procedures" title="Procedures">Procedures</Link>
                                     <Space x={3}/>
                                     <Link className="link dim gray f4 f3-ns dib hover-near-black" to="/glossary" title="Glossary">Glossary</Link>
+                                    <Space x={3}/>
+                                    <Link className="link dim gray f4 f3-ns dib hover-near-black" to="/" title="Logout" onClick={e => auth.logout()}>Logout</Link>
                                 </div>
                             </nav>
                         </header>
                     </div>
-                    <Match exactly pattern="/" component={Home}/>
+                    <Match exactly pattern="/" render={props => <Home auth={auth} {...props}/>}/>
                     <Match exactly pattern="/about" component={About}/>
-                    <Match exactly pattern="/pets" component={Pets}/>
+                    <MatchWhenAuthorized exactly pattern="/pets" component={Pets}/>
                     <Match pattern="/pets/new" component={PetsForm}/>
-                    <Match exactly pattern="/pets/:id/edit" component={PetsForm}/>
-                    <Match pattern="/pets/:id/show" component={ShowPet}/>
-                    <Match exactly pattern="/procedures" component={Procedures}/>
-                    <Match pattern="/procedures/new" component={ProceduresForm}/>
-                    <Match exactly pattern="/procedures/:id/edit" component={ProceduresForm}/>
-                    <Match pattern="/procedures/:id/show" component={ShowProcedure}/>
-                    <Match exactly pattern="/categories" component={Categories}/>
-                    <Match pattern="/categories/new" component={CategoriesForm}/>
-                    <Match exactly pattern="/categories/:id/edit" component={CategoriesForm}/>
-                    <Match pattern="/categories/:id/show" component={ShowCategory}/>
+                    <MatchWhenAuthorized pattern="/pets/:id/edit" component={PetsForm}/>
+                    <MatchWhenAuthorized pattern="/pets/:id/show" component={ShowPet}/>
+                    <MatchWhenAuthorized exactly pattern="/procedures" component={Procedures}/>
+                    <MatchWhenAuthorized pattern="/procedures/new" component={ProceduresForm}/>
+                    <MatchWhenAuthorized exactly pattern="/procedures/:id/edit" component={ProceduresForm}/>
+                    <MatchWhenAuthorized pattern="/procedures/:id/show" component={ShowProcedure}/>
+                    <MatchWhenAuthorized exactly pattern="/categories" component={Categories}/>
+                    <MatchWhenAuthorized pattern="/categories/new" component={CategoriesForm}/>
+                    <MatchWhenAuthorized exactly pattern="/categories/:id/edit" component={CategoriesForm}/>
+                    <MatchWhenAuthorized pattern="/categories/:id/show" component={ShowCategory}/>
                     <Match pattern="/glossary" component={Glossary}/>
                 </div>
             </HashRouter>
@@ -61,7 +70,9 @@ const MatchWhenAuthorized = ({
     component: Component,
     ...rest
 }) => <Match {...rest} render={props => auth.loggedIn()
-    ? <Component {...props}/>
+    ? <div>
+            <Component {...props}/>
+        </div>
     : <Redirect to="/"/>}/>
 
 module.exports = App
