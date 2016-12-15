@@ -7,6 +7,7 @@ const Procedures = require('../procedures')
 const PetCard = require('./card')
 const Footer = require('../../components/footer')
 const PageTitle = require('../../components/page-title')
+const Break = require('../../components/break')
 
 const ShowPet = React.createClass({
     getInitialState() {
@@ -41,9 +42,9 @@ const ShowPet = React.createClass({
                     ? <Redirect to="/pets"/>
                     : null}
                 <PageTitle title={this.state.pet.petName + ' ' + this.state.pet.ownerLastName}/>
-                <hr className="w-50 tl b--dark-blue"/>
+                <Break/>
                 <PetCard pet={this.state.pet}/>
-                <hr className="w-50 tl b--dark-blue"/>
+                <Break/>
                 <div>
                     {this.state.pet._id
                         ? <Procedures petID={this.state.pet._id}/>

@@ -4,6 +4,7 @@ const data = require('../../utils/data')()
 const TextField = require('../../components/text-field')
 const ButtonComponent = require('../../components/button-save')
 const Footer = require('../../components/footer')
+const Break = require('../../components/break')
 
 const ProceduresForm = React.createClass({
     getInitialState() {
@@ -103,7 +104,8 @@ const ProceduresForm = React.createClass({
                     fontFamily: '"Avenir Next", sans-serif'
                 }}>{formState + ' '}
                     Procedure</h2>
-                <form onSubmit={this.handleSubmit}>
+                <Break/>
+                <form className="mt4" onSubmit={this.handleSubmit}>
                     <TextField label="Procedure" value={this.state.procedure.procedure} onChange={this.handleChange('procedure')}/>
                     <TextField label="Date of Procedure" value={this.state.procedure.datePerformed} onChange={this.handleChange('datePerformed')} type="date"/>
                     <TextField label="Pet" value={this.state.procedure.parent_id} onChange={this.handleChange('parent_id')}/>
@@ -125,16 +127,15 @@ const ProceduresForm = React.createClass({
                             {this.state.categories.map(category => <option key={category._id} value={category._id}>{category.category}</option>)}
                         </select>
                     </div>
-                    <div className="mb4">
+                    <div className="mb2">
                         <ButtonComponent title="Save"/>
                     </div>
 
                 </form>
+                <Break/>
                 <div className="mb4">
                     <Link to="/procedures">
-                        <button className="f6 fw1 dim br2 ba ph3 pv2 mt3 mb2 black center link no-underline">
-                            Return
-                        </button>
+                        <ButtonComponent title="Return"/>
                     </Link>
                 </div>
                 <Footer/>

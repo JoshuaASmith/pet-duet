@@ -4,6 +4,7 @@ const data = require('../../utils/data')()
 const ButtonComponent = require('../../components/button-save')
 const PageTitle = require('../../components/page-title')
 const Footer = require('../../components/footer')
+const Break = require('../../components/break')
 const {path} = require('ramda')
 
 const ShowProcedure = React.createClass({
@@ -18,7 +19,7 @@ const ShowProcedure = React.createClass({
     handleRemove(e) {
         e.preventDefault()
         if (confirm('Are you sure?')) {
-            data.remove('procedure', this.props.params.id, this.state.procedure).then(res => {
+            data.remove('procedures', this.props.params.id, this.state.procedure).then(res => {
                 this.setState({resolved: true})
             })
         }
@@ -27,10 +28,10 @@ const ShowProcedure = React.createClass({
         return (
             <div>
                 {this.state.resolved
-                    ? <Redirect to="/procedures"/>
+                    ? <Redirect to="/pets"/>
                     : null}
                 <PageTitle title="Procedure"/>
-                <hr className="w-50 tl b--dark-blue"/>
+                <Break/>
                 <div>
                     <div className="tc avenir">
                         <dl className="lh-title pa4 mt0">
@@ -53,10 +54,10 @@ const ShowProcedure = React.createClass({
                         </dl>
                     </div>
                 </div>
-                <hr className="w-50 tl b--dark-blue"/>
+                <Break/>
                 <div className="mb4">
                     <Link to={`/procedures/${this.state.procedure._id}/edit?parent_id=${this.state.procedure.parent_id}`}><ButtonComponent title="Edit Procedure Record"/></Link>
-                    <a onClick={this.handleRemove}><ButtonComponent title="Remove Procedure"/></a>
+                    <a className="" href="#" onClick={this.handleRemove}><ButtonComponent title="Remove Procedure"/></a>
                     <Link to="/procedures"><ButtonComponent title="Return"/></Link>
                 </div>
                 <Footer/>

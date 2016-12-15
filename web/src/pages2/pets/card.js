@@ -6,9 +6,7 @@ const PetCard = React.createClass({
             <div>
                 <div className="tc avenir">
                     <div className="mt3">
-                        <img src={this.props.pet.file} style={{
-                            height: '200px'
-                        }} role="presentation"/>
+                        <img className="h5" src={this.props.pet.file} role="presentation"/>
                     </div>
                     <dl className="lh-title pa4 mt0">
                         <dt className="f5 b">Pet Name</dt>

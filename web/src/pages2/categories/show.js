@@ -3,6 +3,7 @@ const {Link, Redirect} = require('react-router')
 const data = require('../../utils/data')()
 const ButtonComponent = require('../../components/button-save')
 const Footer = require('../../components/footer')
+const Break = require('../../components/break')
 
 const ShowCategory = React.createClass({
     getInitialState() {
@@ -29,7 +30,7 @@ const ShowCategory = React.createClass({
                     ? <Redirect to="/categories"/>
                     : null}
                 <h3 className="fw1 f2 tc">Category</h3>
-                <hr className="w-50 tl b--dark-blue"/>
+                <Break/>
                 <div className="tc">
                     <h3>{this.state.category._id}</h3>
                     <h3>{this.state.category.category}</h3>

@@ -4,6 +4,7 @@ const data = require('../../utils/data')()
 const TextField = require('../../components/text-field')
 const ButtonComponent = require('../../components/button-save')
 const Footer = require('../../components/footer')
+const Break = require('../../components/break')
 
 const PetsForm = React.createClass({
     getInitialState() {
@@ -100,7 +101,7 @@ const PetsForm = React.createClass({
                     fontFamily: '"Avenir Next", sans-serif'
                 }}>{formState + ' '}
                     Pet</h2>
-                <hr className="w-50 tl b--dark-blue"/>
+                <Break/>
 
                 <form onSubmit={this.handleSubmit}>
                     <TextField label="Pet Name" value={this.state.pet.petName} onChange={this.handleChange('petName')}/>
@@ -108,21 +109,12 @@ const PetsForm = React.createClass({
                     <TextField label="Owner First Name" value={this.state.pet.ownerFirstName} onChange={this.handleChange('ownerFirstName')} type="text"/>
                     <TextField label="Pet Date of Birth" value={this.state.pet.petDOB} onChange={this.handleChange('petDOB')} type="date"/>
                     <TextField label="Species/Breed" value={this.state.pet.petSpeciesBreed} onChange={this.handleChange('petSpeciesBreed')}/>
-                    <TextField label="Special Markings" value={this.state.pet.petMarkings} onChange={this.handleChange('petMarkings')}/> {/* <div className="tc center pa3">
-                        <label htmlFor="">Procedures</label>
-                        <select value={this.state.procedures._id} onChange={this.handleSelect}>
-                            <option value="-1">Select</option>
-                            {this.state.procedures.map(procedure => <option key={procedure._id} value={procedure._id}>{procedure.procedure}</option>)}
-                        </select>
-                    </div> */}
+                    <TextField label="Special Markings" value={this.state.pet.petMarkings} onChange={this.handleChange('petMarkings')}/>
                     <div className="tc center pa3">
                         <label>Pet Image</label>
                         <input type="file" onChange={this.handleUpload}/>
                         <div className="pa3">
-                            <img className="b--black" src={this.state.pet.file} style={{
-                                height: '200px',
-                                width: '200px'
-                            }} role="presentation"/>
+                            <img className="b--black h5 w5" src={this.state.pet.file} role="presentation"/>
                         </div>
                     </div>
                     <div>

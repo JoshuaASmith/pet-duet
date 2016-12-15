@@ -5,13 +5,16 @@ const HTTPError = require('node-http-error')
 const port = process.env.PORT || 4000
 const cors = require('cors')
 app.use(cors({origin: true, credentials: true}))
+//parses the json
 const bodyParser = require('body-parser')
 app.use(bodyParser.json({limit: '50mb'}))
-//parses the json
 app.use(bodyParser.urlencoded({limit: '50mb', extended: true}))
 const dal = require('./dal.js')
+////auth/////
 const jwt = require('express-jwt')
 const checkJWT = jwt({secret: process.env.AUTH0_SECRET})
+
+//////////// EXPRESS DATE FUNCTIONS /////////////////
 
 /////////////////////////////////////////////////////
 ////////////// PETS /////////////////////////////////
@@ -38,7 +41,7 @@ app.get('/pets/:id', function(req, res, next) {
 
 app.put('/pets/:id', function(req, res, next) {
     const petID = req.params.id
-    dal.getPet(req.params.id, function callback(err, data) {
+    dal.getPet(petID, function callback(err, data) {
         if (err) {
             return err
         }
@@ -89,7 +92,7 @@ app.get('/procedures/:id', function(req, res, next) {
 
 app.put('/procedures/:id', function(req, res, next) {
     const procedureID = req.params.id
-    dal.getProcedure(req.params.id, function callback(err, data) {
+    dal.getProcedure(procedureID, function callback(err, data) {
         if (err) {
             return err
         }
@@ -103,7 +106,7 @@ app.put('/procedures/:id', function(req, res, next) {
 
 app.delete('/procedures/:id', function(req, res, next) {
     const procedureID = req.params.id
-    dal.getPet(req.params.id, function callback(err, data) {
+    dal.getPet(procedureID, function callback(err, data) {
         if (err) {
             return err
         }

@@ -21,10 +21,7 @@ const Pets = React.createClass({
         })
     },
     render() {
-        const li = pet => <li key={pet._id}>
-            <Link to={`/pets/${pet._id}/show`}>{pet.petName + ' ' + pet.ownerLastName}</Link>
-        </li>
-        const funli = pet => <li key={pet._id} className="flex items-center lh-copy pa3 ph0-l bb b--black-50">
+        const li = pet => <li key={pet._id} className="flex items-center lh-copy pa3 ph0-l bb b--black-50">
             <img className="w2 h2 w3-ns h3-ns br-100" src={pet.file} role="presentation"/>
             <div className="pl3 flex-auto tc center">
                 <Link className="link dark-blue" to={`/pets/${pet._id}/show`}>{pet.petName + ' ' + pet.ownerLastName}</Link>
@@ -38,7 +35,7 @@ const Pets = React.createClass({
                         <input className="pa2 input-reset ba b--dark-blue bg-transparent hover-bg-black hover-white w-100 tc" type="text" name="pet-search" onChange={this.filter}/>
                     </div>
                     <ul className="list mr5 avenir f2">
-                        {this.state.filtered.map(funli)}
+                        {this.state.filtered.map(li)}
                     </ul>
                 </div>
                 <div className="mb4">

@@ -2,16 +2,17 @@ const React = require('react')
 const PageTitle = require('../components/page-title')
 const Footer = require('../components/footer')
 const GlossaryCard = require('../components/glossary-card')
+const Break = require('../components/break')
 
 const Glossary = React.createClass({
     render() {
         return (
             <div>
-                <div className="w-50 center mt4">
+                <div className="center mt4">
                     <div className="center tc">
                         <PageTitle title="Glossary"/>
                     </div>
-                    <hr className="tl b--dark-blue"/>
+                    <Break/>
                     <div>
                         <GlossaryCard word="Canine Distemper" definition="This highly contagious viral disease is found wherever dogs are found. It affects the respiratory and nervous system and is often fatal. Primary vaccination should begin at 6-12 weeks of age since dogs often contract the disease at an early age."/>
                         <GlossaryCard word="Canine Parvovirus (CPV)" definition="This contagious viral disease usually causes severe diarrhea and vomiting in dogs of all ages, but is especially deadly in puppies."/>

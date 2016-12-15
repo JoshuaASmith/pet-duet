@@ -2,6 +2,7 @@ const React = require('react')
 const data = require('../../utils/data')()
 const {Link} = require('react-router')
 const PageTitle = require('../../components/page-title')
+const Break = require('../../components/break')
 const {filter, propEq} = require('ramda')
 
 const Procedures = React.createClass({
@@ -26,14 +27,15 @@ const Procedures = React.createClass({
                 <div className="tc w-50 center mt4">
                     <PageTitle title="Procedures"/>
                 </div>
-                <hr className="w-50 tl b--dark-blue"/>
-                <div className="pt2">
+                <Break/>
+                <div className="pv2">
                     <div>
                         <ul className="list pl0 ml0 center mw6 ba b--light-silver br3 bg-light-gray black">
                             {this.state.procedures.map(li)}
                         </ul>
                     </div>
                 </div>
+                <Break/>
             </div>
         )
     }

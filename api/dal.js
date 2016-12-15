@@ -5,7 +5,6 @@ PouchDB.plugin(require('pouchdb-find'))
 const fetchConfig = require('zero-config')
 var config = fetchConfig(path.join(__dirname, '..'), {dcValue: 'test'})
 const urlFormat = require('url').format
-// const db = new PouchDB(urlFormat(config.get("couch")))
 require('dotenv').config();
 const db = new PouchDB(process.env.DB_URL)
 
