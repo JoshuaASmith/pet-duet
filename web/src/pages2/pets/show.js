@@ -1,7 +1,6 @@
 const React = require('react')
 const {Link, Redirect} = require('react-router')
 const data = require('../../utils/data')()
-//const confirm = require('react-confirm2')
 const ButtonComponent = require('../../components/button-save')
 const Procedures = require('../procedures')
 const PetCard = require('./card')
@@ -25,7 +24,7 @@ const ShowPet = React.createClass({
         data.get('pets', this.props.params.id).then(pet => {
             this.setState({pet})
         })
-        data.list('procedures').then(procedures => console.log(procedures)).then(procedures => procedures.filter(procedure => procedure.parent_id === this.state.pet._id)).then(procedures => this.setState({procedures: procedures}))
+        // data.list('procedures').then(procedures => procedures.filter(procedure => procedure.parent_id === this.state.pet._id)).then(procedures => this.setState({procedures: procedures}))
     },
     handleRemove(e) {
         e.preventDefault()

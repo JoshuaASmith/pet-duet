@@ -1,3 +1,4 @@
+// page title component- takes title prop
 const React = require('react')
 
 const PageTitle = React.createClass({

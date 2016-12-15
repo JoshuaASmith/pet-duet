@@ -1,3 +1,4 @@
+//small <hr> component for pet card
 const React = require('react')
 
 const MBreak = React.createClass({

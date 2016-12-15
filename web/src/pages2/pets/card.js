@@ -1,3 +1,4 @@
+// card for pets/show.js page. Takes full pet prop.
 const React = require('react')
 const MBreak = require('../../components/mini-break')
 

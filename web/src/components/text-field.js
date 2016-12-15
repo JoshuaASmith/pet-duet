@@ -1,3 +1,4 @@
+// input field component- Props: label, type, value, onChange, placeholder, name (built on rebass)
 const React = require('react')
 const {Input} = require('rebass')
 

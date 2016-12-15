@@ -1,3 +1,4 @@
+// glossary card component- takes word prop and definition prop
 const React = require('react')
 
 const GlossaryCard = React.createClass({

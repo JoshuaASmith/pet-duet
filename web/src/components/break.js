@@ -1,3 +1,4 @@
+////<hr> line break component
 const React = require('react')
 
 const Break = React.createClass({

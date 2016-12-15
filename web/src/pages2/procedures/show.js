@@ -34,7 +34,7 @@ const ShowProcedure = React.createClass({
                 <Break/>
                 <div>
                     <div className="tc avenir">
-                        <dl className="lh-title pa4 mt0">
+                        <dl className="lh-title pa3 mt0">
                             <dt className="f5 b mt2">Procedure</dt>
                             <dd className="ml0">{this.state.procedure.procedure}</dd>
                             <hr className="w-10"/>
@@ -55,10 +55,13 @@ const ShowProcedure = React.createClass({
                     </div>
                 </div>
                 <Break/>
-                <div className="mb4">
+                <div className="mb3">
                     <Link to={`/procedures/${this.state.procedure._id}/edit?parent_id=${this.state.procedure.parent_id}`}><ButtonComponent title="Edit Procedure Record"/></Link>
                     <a className="" href="#" onClick={this.handleRemove}><ButtonComponent title="Remove Procedure"/></a>
-                    <Link to="/procedures"><ButtonComponent title="Return"/></Link>
+                </div>
+                <Break/>
+                <div className="mb3">
+                    <Link to="/pets"><ButtonComponent title="Return"/></Link>
                 </div>
                 <Footer/>
             </div>

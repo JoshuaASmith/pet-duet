@@ -1,3 +1,4 @@
+// button component- needs title prop
 const React = require('react')
 
 const ButtonComponent = React.createClass({

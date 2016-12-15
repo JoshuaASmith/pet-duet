@@ -31,7 +31,6 @@ const PetsForm = React.createClass({
         }
     },
     componentDidMount() {
-        data.list('procedures').then(procedures => this.setState({procedures: procedures.docs}))
         if (this.props.params.id) {
             data.get('pets', this.props.params.id).then(pet => {
                 this.setState({pet})
@@ -59,19 +58,6 @@ const PetsForm = React.createClass({
             }).catch(err => console.log(err))
         }
     },
-    handleSelect(e) {
-        e.preventDefault()
-        let pet = {
-            ...this.state.pet
-        }
-        let procedures = {
-            ...this.state.procedures
-        }
-        pet.procedure = procedures.filter(procedure => {
-            return procedure.id === parseInt(e.target.value, 10)
-        })
-        this.setState({procedures})
-    },
     handleUpload(e) {
         let pet = {
             ...this.state.pet
@@ -90,21 +76,13 @@ const PetsForm = React.createClass({
             ? 'Edit'
             : 'New'
         return (
-            <div className="">
+            <div>
                 {this.state.resolved
                     ? <Redirect to="/pets"/>
                     : null}
-                <h2 className="avenir fw1 fw1-l tc" style={{
-                    boxSizing: 'border-box',
-                    fontSize: 50,
-                    fontWeight: 600,
-                    textTransform: 'uppercase',
-                    letterSpacing: '0.1em',
-                    fontFamily: '"Avenir Next", sans-serif'
-                }}>{formState + ' '}
+                <h2 className="avenir fw6 f1 tc ttu tracked">{formState + ' '}
                     Pet</h2>
                 <Break/>
-
                 <form onSubmit={this.handleSubmit}>
                     <TextField label="Pet Name" value={this.state.pet.petName} onChange={this.handleChange('petName')}/>
                     <TextField label="Owner Last Name" value={this.state.pet.ownerLastName} onChange={this.handleChange('ownerLastName')}/>

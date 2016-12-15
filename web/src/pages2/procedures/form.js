@@ -30,11 +30,9 @@ const ProceduresForm = React.createClass({
     },
     componentDidMount() {
         data.list('categories').then(categories => this.setState({categories: categories.docs}))
-        // data.list('pets').then(pets => console.log('pets.docs', pets.docs)).then(pets => this.setState({pets: pets.docs}))
         data.get('pets', this.props.location.query.pet_id).then(res => this.setState({pet: res}))
         if (this.props.params.id) {
             data.get('procedures', this.props.params.id).then(procedure => {
-                console.log(procedure)
                 return procedure
             }).then(procedure => {
                 this.setState({procedure})
@@ -67,11 +65,7 @@ const ProceduresForm = React.createClass({
             ...this.state.procedure
         }
         const categories = [...this.state.categories]
-        // procedure.category = categories.filter(category => {
-        //     return category.id === parseInt(e.target.value, 10)
-        // })
         procedure.category = categories.find(category => {
-            console.log('test2', category._id === e.target.value)
             return category._id === e.target.value
         })
         this.setState({procedure})
@@ -95,31 +89,14 @@ const ProceduresForm = React.createClass({
                 {this.state.resolved
                     ? <Redirect to="/pets"/>
                     : null}
-                <h2 className="avenir fw1 fw1-l tc" style={{
-                    boxSizing: 'border-box',
-                    fontSize: 50,
-                    fontWeight: 600,
-                    textTransform: 'uppercase',
-                    letterSpacing: '0.1em',
-                    fontFamily: '"Avenir Next", sans-serif'
-                }}>{formState + ' '}
+                <h2 className="avenir fw6 f1 tc ttu tracked">{formState + ' '}
                     Procedure</h2>
                 <Break/>
                 <form className="mt4" onSubmit={this.handleSubmit}>
                     <TextField label="Procedure" value={this.state.procedure.procedure} onChange={this.handleChange('procedure')}/>
                     <TextField label="Date of Procedure" value={this.state.procedure.datePerformed} onChange={this.handleChange('datePerformed')} type="date"/>
                     <TextField label="Pet" value={this.state.procedure.parent_id} onChange={this.handleChange('parent_id')}/>
-                    <div className="tc center">
-                        <label className="f6 b db mb2">Comments</label>
-                        <input value={this.state.procedure.comments} onChange={this.handleChange('comments')} className="db border-box hover-black w-100 measure ba b--black-20 pa2 br2 mb2 center" type="text"/>
-                    </div>
-                    {/* <div className="ph3 pv4 db">
-                        <label className="db">Pet</label>
-                        <select value={this.state.procedure.parent_id} onChange={this.handlePetSelect}>
-                            <option value="-1">Select</option>
-                            {this.state.pets.map(pet => <option key={pet._id} value={pet._id}>{pet._id}</option>)}
-                        </select>
-                    </div> */}
+                    <TextField label="Comments" value={this.state.procedure.comments} onChange={this.handleChange('comments')}/>
                     <div className="pa3 db">
                         <label className="db">Procedure Category</label>
                         <select value={this.state.procedure.category.id} onChange={this.handleSelect}>
@@ -130,13 +107,10 @@ const ProceduresForm = React.createClass({
                     <div className="mb2">
                         <ButtonComponent title="Save"/>
                     </div>
-
                 </form>
                 <Break/>
                 <div className="mb4">
-                    <Link to="/procedures">
-                        <ButtonComponent title="Return"/>
-                    </Link>
+                    <Link to="/pets"><ButtonComponent title="Return"/></Link>
                 </div>
                 <Footer/>
             </div>
