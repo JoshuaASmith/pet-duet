@@ -2,10 +2,7 @@ const path = require('path')
 const PouchDB = require('pouchdb-http')
 PouchDB.plugin(require('pouchdb-mapreduce'))
 PouchDB.plugin(require('pouchdb-find'))
-const fetchConfig = require('zero-config')
-var config = fetchConfig(path.join(__dirname, '..'), {dcValue: 'test'})
 const urlFormat = require('url').format
-require('dotenv').config();
 const db = new PouchDB(process.env.DB_URL)
 
 const dal = {

@@ -1,6 +1,7 @@
+//require('dotenv').config()
 const http = require('http')
 const app = require('express')()
-require('dotenv').config()
+
 const HTTPError = require('node-http-error')
 const port = process.env.PORT || 4000
 const cors = require('cors')
