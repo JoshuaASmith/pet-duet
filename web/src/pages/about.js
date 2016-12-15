@@ -11,7 +11,9 @@ const About = React.createClass({
                 <div>
                     <PageTitle title="About Pet Duet"/>
                 </div>
-                <hr className="w-90 mb4"/>
+                <div className="mb4">
+                    <hr className="w-90 tl b--dark-blue"/>
+                </div>
                 <article data-name="article-full-bleed-background" className="mb4">
                     <div className="cf" style={{
                         background: 'url(https://i.imgsafe.org/eb938b2152.jpg) no-repeat',
@@ -21,12 +23,13 @@ const About = React.createClass({
                         <div className="fl pa3 pa4-ns bg-white black-70 measure-narrow f3 times fr" style={{
                             marginRight: 200
                         }}>
-                            <header className="bb b--black-70">
+                            <header className="">
                                 <h3 className="f2 fw7 ttu tracked lh-title mt0 mb3 avenir pv4 tc">Pet Duet</h3>
                                 <h4 className="f3 fw4 i lh-title mt0 tc">Join in harmony with your vet
                                     <br></br>over your pet's health.</h4>
                             </header>
-                            <section className="pt5 pb4">
+                            <hr className="w-80 tl b--dark-blue"/>
+                            <section className="pt3 pb4">
                                 <p className="times lh-copy measure f4 mt0">
                                     Pet Duet is designed to make communication between owner's and vets easier and more efficient. Owners can login to Pet Duet and see the status of their pet's vaccination records and information on their recent visits. Vets will have a centralized place to upload information about client's pets to make communication more seamless. Help take the stress out of caring for your pets by using Pet Duet!
                                 </p>

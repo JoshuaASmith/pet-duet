@@ -13,6 +13,8 @@ const PetsForm = React.createClass({
                 petName: '',
                 ownerLastName: '',
                 ownerFirstName: '',
+                ownerPhone: '',
+                ownerEmail: '',
                 petDOB: '',
                 petSpeciesBreed: '',
                 petMarkings: '',
@@ -107,9 +109,13 @@ const PetsForm = React.createClass({
                     <TextField label="Pet Name" value={this.state.pet.petName} onChange={this.handleChange('petName')}/>
                     <TextField label="Owner Last Name" value={this.state.pet.ownerLastName} onChange={this.handleChange('ownerLastName')}/>
                     <TextField label="Owner First Name" value={this.state.pet.ownerFirstName} onChange={this.handleChange('ownerFirstName')} type="text"/>
+                    <TextField label="Owner Phone Number" value={this.state.pet.ownerPhone} onChange={this.handleChange('ownerPhone')} type="text"/>
+                    <TextField label="Owner Email Address" value={this.state.pet.ownerEmail} onChange={this.handleChange('ownerEmail')} type="email"/>
                     <TextField label="Pet Date of Birth" value={this.state.pet.petDOB} onChange={this.handleChange('petDOB')} type="date"/>
                     <TextField label="Species/Breed" value={this.state.pet.petSpeciesBreed} onChange={this.handleChange('petSpeciesBreed')}/>
+                    <TextField label="Pet Gender" value={this.state.pet.petGender} onChange={this.handleChange('petGender')} type="text"/>
                     <TextField label="Special Markings" value={this.state.pet.petMarkings} onChange={this.handleChange('petMarkings')}/>
+                    <TextField label="Date Acquired" value={this.state.pet.petDateAcquired} onChange={this.handleChange('petDateAcquired')} type="date"/>
                     <div className="tc center pa3">
                         <label>Pet Image</label>
                         <input type="file" onChange={this.handleUpload}/>
@@ -117,9 +123,10 @@ const PetsForm = React.createClass({
                             <img className="b--black h5 w5" src={this.state.pet.file} role="presentation"/>
                         </div>
                     </div>
-                    <div>
+                    <div className="mb3">
                         <ButtonComponent title="Save"/>
                     </div>
+                    <Break/>
                     <div className="mb3">
                         <Link to="/pets"><ButtonComponent title="Return"/></Link>
                     </div>
