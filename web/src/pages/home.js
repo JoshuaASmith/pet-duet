@@ -1,6 +1,6 @@
 const React = require('react')
 // const {Link} = require('react-router')
-const {Banner, Heading} = require('rebass')
+const {Banner} = require('rebass')
 
 const Home = React.createClass({
     getInitialState() {
@@ -20,7 +20,7 @@ const Home = React.createClass({
                     </h1>
                 </Banner>
                 <footer className="bg-near-black white-80 pb4 ph4">
-                    <p className="f4 tc">
+                    <p className="f6 f4-ns tc">
                         <a className="link white-80 hover-light-purple db" target="_blank" href="http://www.github.com/joshuaasmith">Github</a>
                         <a className="link white-80 hover-green avenir db" href="mailto:joshua.aaron.smith17@gmail.com">joshua.aaron.smith17@gmail.com</a>
                     </p>
